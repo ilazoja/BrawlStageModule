@@ -87,26 +87,26 @@ Ground* stKingOfTheHill::createObjGround(int mdlIndex) {
 
             switch (int(resNodeData->m_scale.m_z)) {
                 case 2:
-                    this->createObjBreak(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+                    this->createObjBreak(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                             resNodeData->m_rotation.m_z, resNodeData->m_translation.m_z,
                                             resNodeData->m_rotation.m_y, resNodeData->m_scale.m_x,
                                             resNodeData->m_scale.m_y);
                     break;
                 case 3:
-                    this->createObjLand(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+                    this->createObjLand(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                          resNodeData->m_rotation.m_z, resNodeData->m_translation.m_z,
                                          resNodeData->m_rotation.m_y, resNodeData->m_scale.m_x,
                                          resNodeData->m_scale.m_y);
                     break;
                 default:
                     if (resNodeData->m_scale.m_z < 0) {
-                        this->createObjElevator(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
-                                                &resNodeData->m_scale.m_xy, resNodeData->m_rotation.m_y,
+                        this->createObjElevator(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
+                                                resNodeData->m_scale.xy(), resNodeData->m_rotation.m_y,
                                                 resNodeData->m_rotation.m_z, resNodeData->m_translation.m_z,
                                                 -resNodeData->m_scale.m_z);
                     }
                     else {
-                        this->createObjPlatform(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+                        this->createObjPlatform(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                         resNodeData->m_rotation.m_z, resNodeData->m_scale.m_x, resNodeData->m_translation.m_z,
                                         resNodeData->m_rotation.m_y);
                     }
@@ -122,8 +122,8 @@ Ground* stKingOfTheHill::createObjGround(int mdlIndex) {
         }
         for (int i = springsIndex + 1; i < cannonsIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjSpring(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, &resNodeData->m_translation.m_xy,
-                                  resNodeData->m_rotation.m_z, &resNodeData->m_scale.m_xy, resNodeData->m_scale.m_z,
+            this->createObjSpring(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, resNodeData->m_translation.xy(),
+                                  resNodeData->m_rotation.m_z, resNodeData->m_scale.xy(), resNodeData->m_scale.m_z,
                                   resNodeData->m_translation.m_z);
         }
         for (int i = cannonsIndex + 1; i < laddersIndex; i++) {
@@ -131,13 +131,13 @@ Ground* stKingOfTheHill::createObjGround(int mdlIndex) {
             u32 rotateFlags = resNodeData->m_scale.m_y;
             bool alwaysRotate = rotateFlags & 1;
             bool fullRotate = rotateFlags & 2;
-            this->createObjCannon(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            this->createObjCannon(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                     resNodeData->m_rotation.m_z, resNodeData->m_rotation.m_y, resNodeData->m_scale.m_z,
                                     resNodeData->m_translation.m_z, alwaysRotate, fullRotate, resNodeData->m_scale.m_x);
         }
         for (int i = laddersIndex + 1; i < catapultsIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjLadder(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy, resNodeData->m_translation.m_z,
+            this->createObjLadder(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(), resNodeData->m_translation.m_z,
                                   resNodeData->m_rotation.m_y, resNodeData->m_rotation.m_z);
         }
         for (int i = catapultsIndex + 1; i < warpsIndex; i++) {
@@ -149,36 +149,36 @@ Ground* stKingOfTheHill::createObjGround(int mdlIndex) {
         for (int i = warpsIndex + 1; i < toxinsIndex; i += 2) {
             nw4r::g3d::ResNodeData* resNodeDataFrom = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             nw4r::g3d::ResNodeData* resNodeDataTo = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
-            this->createObjWarpZone(resNodeDataFrom->m_rotation.m_x, &resNodeDataFrom->m_translation.m_xy,
+            this->createObjWarpZone(resNodeDataFrom->m_rotation.m_x, resNodeDataFrom->m_translation.xy(),
                                     resNodeDataFrom->m_rotation.m_z, resNodeDataFrom->m_scale.m_z,
-                                    &resNodeDataFrom->m_scale.m_xy, resNodeDataFrom->m_translation.m_z,
+                                    resNodeDataFrom->m_scale.xy(), resNodeDataFrom->m_translation.m_z,
                                     resNodeDataFrom->m_rotation.m_y,
-                                    &resNodeDataTo->m_translation.m_xy, resNodeDataTo->m_scale.m_z, resNodeDataTo->m_rotation.m_z,
+                                    resNodeDataTo->m_translation.xy(), resNodeDataTo->m_scale.m_z, resNodeDataTo->m_rotation.m_z,
                                     resNodeDataTo->m_rotation.m_x, resNodeDataTo->m_translation.m_z);
         }
         for (int i = toxinsIndex + 1; i < conveyorsIndex; i += 2) {
             nw4r::g3d::ResNodeData* resNodeDataSW = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
-            this->createTriggerHitPointEffect(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy,
+            this->createTriggerHitPointEffect(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy(),
                                         resNodeDataNE->m_scale.m_x, resNodeDataNE->m_scale.m_y);
         }
 
         for (int i = conveyorsIndex + 1; i < watersIndex; i += 2) {
             nw4r::g3d::ResNodeData* resNodeDataSW = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
-            this->createTriggerConveyor(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy,
+            this->createTriggerConveyor(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy(),
                                         resNodeDataNE->m_scale.m_x, resNodeDataNE->m_scale.m_y);
         }
         for (int i = watersIndex + 1; i < windsIndex; i += 2) {
             nw4r::g3d::ResNodeData* resNodeDataSW = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
-            this->createTriggerWater(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy,
+            this->createTriggerWater(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy(),
                                      resNodeDataNE->m_scale.m_x, resNodeDataNE->m_scale.m_y);
         }
         for (int i = windsIndex + 1; i < capturePointsIndex; i += 2) {
             nw4r::g3d::ResNodeData* resNodeDataSW = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
-            this->createTriggerWind(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy,
+            this->createTriggerWind(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy(),
                                      resNodeDataNE->m_scale.m_x, resNodeDataNE->m_scale.m_y);
         }
     }
@@ -273,12 +273,13 @@ void stKingOfTheHill::createObjSpring(int mdlIndex, int collIndex, Vec2f* pos, f
     grSpring* spring = grSpring::create(mdlIndex, "grSpring");
     if (spring != NULL) {
         addGround(spring);
+        Vec2f areaPos = Vec2f(0.0, 0.0);
         grGimmickSpringData springData(
                 pos,
                 rot,
                 bounce,
                 mdlIndex,
-                &(Vec2f){0.0, 0.0},
+                &areaPos,
                 range);
         spring->setMotionPathData(motionPathIndex);
         spring->setGimmickData(&springData); // Note: gimmickData will only apply in next function since was allocated on the stack
@@ -304,9 +305,11 @@ void stKingOfTheHill::createObjLadder(int mdlIndex, Vec2f* pos, int motionPathIn
     grLadder* ladder = grLadder::create(mdlIndex, "grLadder");
     if (ladder != NULL) {
         addGround(ladder);
+        Vec2f areaPos = Vec2f(0.0, 0.0);
+        Vec2f areaRange = Vec2f(0.0, 0.0);
         grGimmickLadderData ladderData(
                 mdlIndex, 0, restrictUpExit, unk2, "",
-                &(Vec2f){0.0, 0.0}, &(Vec2f){0.0, 0.0}
+                &areaPos, &areaRange
         );
         ladder->setMotionPathData(motionPathIndex);
         ladder->startupLadder(this->m_fileData,0,0,&ladderData);
@@ -327,13 +330,15 @@ void stKingOfTheHill::createObjWarpZone(int mdlIndex, Vec2f* pos, float rot, flo
     grWarpZone* warpZone = grWarpZone::create(mdlIndex, "grWarpZone");
     if (warpZone != NULL) {
         addGround(warpZone);
+        Vec2f areaPos = Vec2f(0.0, 0.0);
         grGimmickWarpData warpData(
                 pos, mdlIndex, snd_se_ADVstage_common_FIGHTER_IN, snd_se_invalid,
-                &(Vec2f){0.0, 0.0}, range
+                &areaPos, range
         );
         warpZone->setStageData(m_stageData);
         warpZone->prepareWarpData(motionPathIndex, deactivateFrames);
-        warpZone->setWarpAttrData(&(Vec3f){warpDest->m_x, warpDest->m_y, 0.0}, warpType, isNotAuto);
+        Vec3f warpPos = Vec3f(warpDest->m_x, warpDest->m_y, 0.0);
+        warpZone->setWarpAttrData(&warpPos, warpType, isNotAuto);
         warpZone->setGimmickData(&warpData); // Note: gimmickData will only apply in next function since was allocated on the stack
         warpZone->startup(m_fileData, 0, 0);
         warpZone->setRot(0, 0, rot);
@@ -344,7 +349,8 @@ void stKingOfTheHill::createObjWarpZone(int mdlIndex, Vec2f* pos, float rot, flo
                 warpData.m_pos = *warpDest;
                 toWarpZone->setStageData(m_stageData);
                 toWarpZone->prepareWarpData(connectedMotionPathIndex, deactivateFrames);
-                toWarpZone->setWarpAttrData(&(Vec3f){pos->m_x, pos->m_y, 0.0}, warpType, isNotAuto);
+                warpPos = Vec3f(pos->m_x, pos->m_y, 0.0);
+                toWarpZone->setWarpAttrData(&warpPos, warpType, isNotAuto);
                 toWarpZone->setGimmickData(&warpData); // Note: gimmickData will only apply in next function since was allocated on the stack
                 toWarpZone->startup(m_fileData, 0, 0);
                 toWarpZone->setRot(0, 0, rot);
@@ -358,23 +364,28 @@ void stKingOfTheHill::createObjWarpZone(int mdlIndex, Vec2f* pos, float rot, flo
 }
 
 void stKingOfTheHill::createTriggerHitPointEffect(Vec2f* posSW, Vec2f* posNE, float damage, short detectionRate) {
+    Vec2f areaPos = Vec2f(0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y));
+    Vec2f areaRange = Vec2f(posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y);
     grGimmickHitPointEffectData hitPointEffectData(
             fabsf(damage),
             damage < 0 ? true : false,
             detectionRate,
-            &(Vec2f){0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y)},
-            &(Vec2f){posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y}
+            &areaPos,
+            &areaRange
     );
     this->createGimmickHitPointEffectArea(&hitPointEffectData);
 }
 
 void stKingOfTheHill::createTriggerConveyor(Vec2f* posSW, Vec2f* posNE, float speed, bool isRightDirection) {
+    Vec3f pos = Vec3f(0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y), 0.0);
+    Vec2f areaPos = Vec2f(0.0, 0.0);
+    Vec2f areaRange = Vec2f(posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y);
     grGimmickBeltConveyorData beltConveyorAreaData(
-            &(Vec3f){0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y), 0.0},
+            &pos,
             speed,
             isRightDirection,
-            &(Vec2f){0.0, 0.0},
-            &(Vec2f){posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y},
+            &areaPos,
+            &areaRange,
             gfArea::Shape_Rectangle
     );
 
@@ -382,24 +393,29 @@ void stKingOfTheHill::createTriggerConveyor(Vec2f* posSW, Vec2f* posNE, float sp
 }
 
 void stKingOfTheHill::createTriggerWater(Vec2f* posSW, Vec2f* posNE, float speed, bool canDrown) {
+    Vec2f areaPos = Vec2f(0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y));
+    Vec2f areaRange = Vec2f(posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y);
     grGimmickWaterData waterAreaData(
             posNE->m_y,
             canDrown,
             speed,
-            &(Vec2f){0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y)},
-            &(Vec2f){posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y}
+            &areaPos,
+            &areaRange
     );;
 
     this->createGimmickWaterArea(&waterAreaData);
 }
 
 void stKingOfTheHill::createTriggerWind(Vec2f* posSW, Vec2f* posNE, float strength, float angle) {
+    Vec3f pos = Vec3f(0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y), 0.0);
+    Vec2f areaPos = Vec2f(0.0, 0.0);
+    Vec2f areaRange = Vec2f(posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y);
     grGimmickWindData windAreaData(
-            &(Vec3f){0.5*(posSW->m_x + posNE->m_x), 0.5*(posSW->m_y + posNE->m_y), 0.0},
+            &pos,
             strength,
             angle,
-            &(Vec2f){0.0, 0.0},
-            &(Vec2f){posNE->m_x - posSW->m_x, posNE->m_y - posSW->m_y}
+            &areaPos,
+            &areaRange
     );
 
     this->createGimmickWind2(&windAreaData);

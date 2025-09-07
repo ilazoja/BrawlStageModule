@@ -36,8 +36,8 @@ void grWarpZone::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
         Fighter* fighter = g_ftManager->getFighter(entryId, -1);
         Vec3f currentPos = soExternalValueAccesser::getPos(fighter);
         float currentLr = soExternalValueAccesser::getLr(fighter);
-        int correct = fighter->m_moduleAccesser->getGroundModule()->getCorrect(0);
-        Vec3f zeroVec = {0, 0, 0};
+        int correct = fighter->m_moduleAccesser->getGroundModule().getCorrect(0);
+        Vec3f zeroVec = Vec3f(0, 0, 0);
         switch(this->m_warpType) {
             case 10:
                 if (this->isInHitstun(fighter)) {
@@ -53,9 +53,9 @@ void grWarpZone::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
                 }
             case 1: // Keep status unless on ground (i.e. destination is in the air)
                 this->startGimmickSE(0);
-                fighter->m_moduleAccesser->getPostureModule()->initPos(&warpDest);
+                fighter->m_moduleAccesser->getPostureModule().initPos(&warpDest);
                 if (correct == 1 || correct == 2 || correct == 3) {
-                    fighter->m_moduleAccesser->getStatusModule()->changeStatusRequest(Fighter::Status_Fall, fighter->m_moduleAccesser);
+                    fighter->m_moduleAccesser->getStatusModule().changeStatusRequest(Fighter::Status_Fall, fighter->m_moduleAccesser);
                 }
                 g_ecMgr->setEffect(ef_ptc_pokemon_enemy_in, &warpDest);
                 break;
@@ -65,7 +65,7 @@ void grWarpZone::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
                 }
             case 2: // Keep status
                 this->startGimmickSE(0);
-                fighter->m_moduleAccesser->getPostureModule()->initPos(&warpDest);
+                fighter->m_moduleAccesser->getPostureModule().initPos(&warpDest);
                 g_ecMgr->setEffect(ef_ptc_pokemon_enemy_in, &warpDest);
                 break;
             case 13:
@@ -74,7 +74,7 @@ void grWarpZone::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
                 }
             case 3: // Horizontal wrap
                 warpDest.m_x = currentPos.m_x;
-                fighter->m_moduleAccesser->getPostureModule()->initPos(&warpDest);
+                fighter->m_moduleAccesser->getPostureModule().initPos(&warpDest);
                 break;
             case 14:
                 if (this->isInHitstun(fighter)) {
@@ -82,7 +82,7 @@ void grWarpZone::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
                 }
             case 4: // Vertical wrap
                 warpDest.m_y = currentPos.m_y;
-                fighter->m_moduleAccesser->getPostureModule()->initPos(&warpDest);
+                fighter->m_moduleAccesser->getPostureModule().initPos(&warpDest);
                 break;
             default:
                 break;
@@ -109,7 +109,7 @@ void grWarpZone::update(float deltaFrame) {
 }
 
 bool grWarpZone::isInHitstun(Fighter* fighter) {
-    int status = fighter->m_moduleAccesser->getStatusModule()->getStatusKind();
+    int status = fighter->m_moduleAccesser->getStatusModule().getStatusKind();
     if (status == Fighter::Status_Damage || status == Fighter::Status_Damage_Air || status == Fighter::Status_Damage_Fly) {
         return true;
     }

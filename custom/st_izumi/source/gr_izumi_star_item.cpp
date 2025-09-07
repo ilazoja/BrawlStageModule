@@ -46,7 +46,7 @@ void grIzumiStarItem::update(float deltaFrame)
 
                     float midPosX = (this->stage->m_deadRange.m_left + this->stage->m_deadRange.m_right)/2;
                     float startPosX = randf()*(izumiData->starItemPosRange) + midPosX - izumiData->starItemPosRange/2;
-                    Vec3f startPos = (Vec3f){startPosX, this->stage->m_deadRange.m_up, 0.0};
+                    Vec3f startPos = Vec3f(startPosX, this->stage->m_deadRange.m_up, 0.0);
                     this->setPos(&startPos);
                     this->speedX = randf()*(izumiData->starItemSpeedXRange) - izumiData->starItemSpeedXRange/2;
 
@@ -82,7 +82,7 @@ void grIzumiStarItem::update(float deltaFrame)
         }
     }
     else if (this->state == State_Falling) {
-        Vec3f dir = (Vec3f){this->speedX*deltaFrame, izumiData->starItemSpeedY*deltaFrame, 0.0};
+        Vec3f dir = Vec3f(this->speedX*deltaFrame, izumiData->starItemSpeedY*deltaFrame, 0.0);
         Vec3f newPos = this->getPos() + dir;
         this->setPos(&newPos);
 
@@ -128,7 +128,7 @@ void grIzumiStarItem::update(float deltaFrame)
 
                 newPos += outCollNormalVec*5;
 
-                item->setSafePos(&newPos.m_xy);
+                item->setSafePos(newPos.xy());
                 item->reset(&newPos, lr, 0);
                 item->setVisibilityWhole(true);
             }

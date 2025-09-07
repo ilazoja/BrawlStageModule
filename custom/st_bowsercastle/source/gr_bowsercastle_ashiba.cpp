@@ -20,7 +20,7 @@ void grBowserCastleAshiba::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = this->getNodeIndex(0, "LavaSfx");
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->startGimmickSE(0);
 }

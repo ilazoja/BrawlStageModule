@@ -32,7 +32,7 @@ void grGhostHouseBoo::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->setupAttack();
     this->setupHitPoint();
@@ -53,7 +53,7 @@ void grGhostHouseBoo::setupAttack() {
     stGhostHouseData* ghostHouseData = static_cast<stGhostHouseData*>(this->getStageData());
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -106,8 +106,8 @@ void grGhostHouseBoo::setupAttack() {
 }
 
 void grGhostHouseBoo::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(1.0, &startOffsetPos, &endOffsetPos, 1, this->getNodeIndex(0, "Hurt"));
 }
 
@@ -153,7 +153,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
             }
             Vec3f closestDisp;
             this->findClosestFighterDisp(&closestDisp);
-            this->rotateToDisp(&closestDisp.m_xy, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
+            this->rotateToDisp(closestDisp.xy(), ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
         }
             break;
         case State_Circle:
@@ -172,7 +172,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
 
             Vec3f closestDisp;
             this->findClosestFighterDisp(&closestDisp);
-            this->rotateToDisp(&closestDisp.m_xy, ghostHouseData->booRot, deltaFrame*BOO_ROT_SPEED);
+            this->rotateToDisp(closestDisp.xy(), ghostHouseData->booRot, deltaFrame*BOO_ROT_SPEED);
         }
             break;
         case State_SnakeStart:
@@ -186,7 +186,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
                 Vec3f pos = this->getPos();
                 Vec3f hurtNodeScale;
                 this->getNodeScale(&hurtNodeScale, 0, "Hurt");
-                Vec3f dir = (Vec3f) {this->direction.m_x, this->direction.m_y, 0.0} * hurtNodeScale.m_x;
+                Vec3f dir = Vec3f(this->direction.m_x, this->direction.m_y, 0.0) * hurtNodeScale.m_x;
                 Vec3f outHitPos;
                 Vec3f outCollNormalVec;
 
@@ -197,52 +197,52 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
 
                     if (0 < dirAngle && M_PI / 2 >= dirAngle) { // quad 1
                         if (7 * M_PI / 6 <= normalAngle && 4 * M_PI / 3 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, ghostHouseData->booRot, 0);
                         } else if (5 * M_PI / 4 < normalAngle && 7 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, -ghostHouseData->booRot, 0);
                         } else if (3 * M_PI / 4 < normalAngle && 5 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, ghostHouseData->booRot, 0);
                         }
                     } else if (M_PI / 2 < dirAngle && M_PI >= dirAngle) {   // quad 2
                         if (5 * M_PI / 3 <= normalAngle && 11 * M_PI / 6 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, -ghostHouseData->booRot, 0);
                         } else if (5 * M_PI / 4 < normalAngle && 7 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, ghostHouseData->booRot, 0);
                         } else if (7 * M_PI / 4 < normalAngle || M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, -ghostHouseData->booRot, 0);
                         }
                     } else if (M_PI < dirAngle && 3 * M_PI / 2 >= dirAngle) { // quad 3
                         if (M_PI / 6 <= normalAngle && M_PI / 3 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, -ghostHouseData->booRot, 0);
                         } else if (M_PI / 4 < normalAngle && 3 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, ghostHouseData->booRot, 0);
                         } else if (7 * M_PI / 4 < normalAngle || M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, -ghostHouseData->booRot, 0);
                         }
                     } else if (3 * M_PI / 2 < dirAngle && 2 * M_PI >= dirAngle) {   // quad 4
                         if (2 * M_PI / 3 <= normalAngle && 5 * M_PI / 6 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, ghostHouseData->booRot, 0);
                         } else if (M_PI / 4 < normalAngle && 3 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
                             this->setRot(rotAngle, -ghostHouseData->booRot, 0);
                         } else if (3 * M_PI / 4 < normalAngle && 5 * M_PI / 4 >= normalAngle) {
-                            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+                            this->direction = Vec2f(BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
                             this->setRot(-rotAngle, ghostHouseData->booRot, 0);
                         }
                     }
                 }
 
-                dir = (Vec3f) {this->direction.m_x, this->direction.m_y, 0.0};
+                dir = Vec3f(this->direction.m_x, this->direction.m_y, 0.0);
 
                 Vec3f nextPos = pos + dir * ghostHouseData->booSnakeSpeed * deltaFrame;
                 this->setPos(&nextPos);
@@ -283,7 +283,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
                     this->direction.m_y = -this->direction.m_y;
                     this->remainingDistance = ghostHouseData->booCloudIdleMaxVerticalDistance;
                 }
-                Vec2f newPos = pos.m_xy + this->direction * this->speed * deltaFrame;
+                Vec2f newPos = *pos.xy() + this->direction * this->speed * deltaFrame;
                 if (this->accel > 0 && ((this->direction.m_x < 0 && newPos.m_x <= this->southWestPos->m_x) ||
                     (this->direction.m_x > 0 && newPos.m_x >= this->northEastPos->m_x) ||
                     (newPos.m_x > this->southWestPos->m_x && newPos.m_x < this->northEastPos->m_x && ghostHouseData->booCrewIdleHorizontalTurnChance > randf()))) {
@@ -299,7 +299,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
                         closestFighterDisp.m_y <= 0.0 &&
                         fabsf(closestFighterDisp.m_y) <= ghostHouseData->booCrewDetectRange.m_y) {
                         pos = this->getPos();
-                        Vec2f targetPos = pos.m_xy + closestFighterDisp.m_xy;
+                        Vec2f targetPos = *pos.xy() + *closestFighterDisp.xy();
                         this->setChase(&pos, &targetPos);
                     }
                 }
@@ -310,7 +310,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
             if (currentAnimFrame >= animFrameCount - 1) {
                 this->changeState(State_Chase);
             }
-            Vec2f disp = this->targetPos - this->getPos().m_xy;
+            Vec2f disp = this->targetPos - *this->getPos().xy();
             this->rotateToDisp(&disp, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
         }
             break;
@@ -331,12 +331,12 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
             float initSpeedY = 2*(targetPos.m_y - prevPos.m_y) / ghostHouseData->booCrewChaseFramesToReach;
             float accelY = -initSpeedY / ghostHouseData->booCrewChaseFramesToReach;
 
-            Vec3f newPos = (Vec3f){currentPos.m_x + deltaFrame*speedX,
+            Vec3f newPos = Vec3f(currentPos.m_x + deltaFrame*speedX,
                                    this->prevPos.m_y + initSpeedY*timeElapsed + 0.5*accelY*timeElapsed*timeElapsed,
-                                   0.0};
+                                   0.0);
 
             this->setPos(&newPos);
-            Vec2f disp = this->targetPos - newPos.m_xy;
+            Vec2f disp = this->targetPos - *newPos.xy();
             this->rotateToDisp(&disp, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
         }
             break;
@@ -348,7 +348,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
         {
             Vec3f closestDisp;
             this->findClosestFighterDisp(&closestDisp);
-            this->rotateToDisp(&closestDisp.m_xy, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
+            this->rotateToDisp(closestDisp.xy(), ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
 
             this->timer -= deltaFrame;
             if (this->timer <= 0) {
@@ -360,7 +360,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
         {
             Vec3f closestDisp;
             this->findClosestFighterDisp(&closestDisp);
-            this->rotateToDisp(&closestDisp.m_xy, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
+            this->rotateToDisp(closestDisp.xy(), ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
             this->timer -= deltaFrame;
             if (this->timer <= 0) {
                 this->changeState(State_AppearStart);
@@ -389,7 +389,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
 
                     Vec2f rotDir;
                     if (dirVec.m_x >= 0) {
-                        rotDir = (Vec2f){1.0, 0.0};
+                        rotDir = Vec2f(1.0, 0.0);
                         if (targetFighterLr < 0) {
                             this->changeState(State_ShyStart);
                         }
@@ -398,7 +398,7 @@ void grGhostHouseBoo::updateMove(float deltaFrame) {
                         }
                     }
                     else {
-                        rotDir = (Vec2f){-1.0, 0.0};
+                        rotDir = Vec2f(-1.0, 0.0);
                         if (targetFighterLr > 0) {
                             this->changeState(State_ShyStart);
                         }
@@ -470,19 +470,19 @@ void grGhostHouseBoo::setSnakeLeader(Rect2D* spawnRange, Vec3f* centerPos, u8 nu
     float angle = mtConvRadToDeg(atan2(BOO_SNAKE_DIR_Y, BOO_SNAKE_DIR_X));
     switch (randomStartIndex) {
         case 0:
-            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+            this->direction = Vec2f(BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
             this->setRot(angle, ghostHouseData->booRot, 0);
             break;
         case 1:
-            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y};
+            this->direction = Vec2f(-BOO_SNAKE_DIR_X, -BOO_SNAKE_DIR_Y);
             this->setRot(angle, -ghostHouseData->booRot, 0);
             break;
         case 2:
-            this->direction = (Vec2f) {-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+            this->direction = Vec2f (-BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
             this->setRot(-angle, -ghostHouseData->booRot, 0);
             break;
         case 3:
-            this->direction = (Vec2f) {BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y};
+            this->direction = Vec2f (BOO_SNAKE_DIR_X, BOO_SNAKE_DIR_Y);
             this->setRot(-angle, ghostHouseData->booRot, 0);
             break;
         default:
@@ -511,19 +511,19 @@ void grGhostHouseBoo::setCrew(Vec2f* crewSWPos, Vec2f* crewNEPos) {
     float angle = atan2(ghostHouseData->booCrewDirection.m_y, ghostHouseData->booCrewDirection.m_x);
     switch (randomStartIndex) {
         case 0:
-            this->direction = (Vec2f) {ghostHouseData->booCrewDirection.m_x, -ghostHouseData->booCrewDirection.m_y};
+            this->direction = Vec2f(ghostHouseData->booCrewDirection.m_x, -ghostHouseData->booCrewDirection.m_y);
             this->setRot(angle, ghostHouseData->booRot, 0);
             break;
         case 1:
-            this->direction = (Vec2f) {-ghostHouseData->booCrewDirection.m_x, -ghostHouseData->booCrewDirection.m_y};
+            this->direction = Vec2f(-ghostHouseData->booCrewDirection.m_x, -ghostHouseData->booCrewDirection.m_y);
             this->setRot(angle, -ghostHouseData->booRot, 0);
             break;
         case 2:
-            this->direction = (Vec2f) {-ghostHouseData->booCrewDirection.m_x, ghostHouseData->booCrewDirection.m_y};
+            this->direction = Vec2f(-ghostHouseData->booCrewDirection.m_x, ghostHouseData->booCrewDirection.m_y);
             this->setRot(-angle, -ghostHouseData->booRot, 0);
             break;
         case 3:
-            this->direction = (Vec2f) {ghostHouseData->booCrewDirection.m_x, ghostHouseData->booCrewDirection.m_y};
+            this->direction = Vec2f(ghostHouseData->booCrewDirection.m_x, ghostHouseData->booCrewDirection.m_y);
             this->setRot(-angle, ghostHouseData->booRot, 0);
             break;
         default:
@@ -834,7 +834,7 @@ float grGhostHouseBoo::getMaxSnakeTimer() {
 
 bool grGhostHouseBoo::findClosestFighterDisp(Vec3f* outDisp) {
     Vec3f pos = this->getPos();
-    *outDisp = (Vec3f){0, 0, 0};
+    *outDisp = Vec3f(0, 0, 0);
     float closestDist = HUGE_VALF;
     for (int i = 0; i < g_ftManager->getEntryCount(); i++) {
         int entryId = g_ftManager->getEntryIdFromIndex(i);

@@ -29,7 +29,7 @@ void grGhostHouseBigBoo::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->setupAttack();
     this->setupHitPoint();
@@ -50,7 +50,7 @@ void grGhostHouseBigBoo::setupAttack() {
     stGhostHouseData* ghostHouseData = static_cast<stGhostHouseData*>(this->getStageData());
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -103,8 +103,8 @@ void grGhostHouseBigBoo::setupAttack() {
 }
 
 void grGhostHouseBigBoo::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(1.0, &startOffsetPos, &endOffsetPos, 1, this->getNodeIndex(0, "Hurt"));
 }
 
@@ -163,7 +163,7 @@ void grGhostHouseBigBoo::updateMove(float deltaFrame) {
         case State_Shy:
         case State_Stalk: {
             Vec3f pos = this->getPos();
-            Vec3f dirVec = (Vec3f) {0, 0, 0};
+            Vec3f dirVec = Vec3f(0, 0, 0);
             float closestDist = HUGE_VALF;
             float closestFighterLr = 1.0;
 
@@ -183,14 +183,14 @@ void grGhostHouseBigBoo::updateMove(float deltaFrame) {
             if (closestDist < HUGE_VALF) {
                 Vec2f rotDir;
                 if (dirVec.m_x >= 0) {
-                    rotDir = (Vec2f){1.0, 0.0};
+                    rotDir = Vec2f(1.0, 0.0);
                     if (closestFighterLr < 0) {
                         this->changeState(State_ShyStart);
                     } else {
                         this->changeState(State_Stalk);
                     }
                 } else {
-                    rotDir = (Vec2f){-1.0, 0.0};
+                    rotDir = Vec2f(-1.0, 0.0);
 
                     if (closestFighterLr > 0) {
                         this->changeState(State_ShyStart);
@@ -228,9 +228,9 @@ void grGhostHouseBigBoo::updateMove(float deltaFrame) {
 
             Vec2f rotDir;
             if (dirVec.m_x >= 0) {
-                rotDir = (Vec2f) {1.0, 0.0};
+                rotDir = Vec2f(1.0, 0.0);
             } else {
-                rotDir = (Vec2f) {-1.0, 0.0};
+                rotDir = Vec2f(-1.0, 0.0);
             }
 
             this->rotateToDisp(&rotDir, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
@@ -401,5 +401,5 @@ void grGhostHouseBigBoo::rotateToDisp(Vec2f* disp, float maxRot, float rotateSpe
 }
 
 Vec3f grGhostHouseBigBoo::getRandPos() {
-    return (Vec3f){randf()*(this->northEastPos->m_x - this->southWestPos->m_x) + this->southWestPos->m_x, randf()*(this->northEastPos->m_y - this->southWestPos->m_y) + this->southWestPos->m_y, 0.0};
+    return Vec3f(randf()*(this->northEastPos->m_x - this->southWestPos->m_x) + this->southWestPos->m_x, randf()*(this->northEastPos->m_y - this->southWestPos->m_y) + this->southWestPos->m_y, 0.0);
 }

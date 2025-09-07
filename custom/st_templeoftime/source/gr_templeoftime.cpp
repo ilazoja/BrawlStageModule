@@ -52,9 +52,9 @@ bool grTempleOfTime::checkForOcarina() {
         int entryId = g_ftManager->getEntryIdFromIndex(i);
         if (g_ftManager->isFighterActivate(entryId, -1)) {
             Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-            if (fighter->getFtKind() == Fighter_Link && fighter->m_moduleAccesser->getStatusModule()->getStatusKind() == 279) {
+            if (fighter->getFtKind() == Fighter_Link && fighter->m_moduleAccesser->getStatusModule().getStatusKind() == 279) {
                 isOcarinaBeingPlayed = true;
-                ipPadButton currentButton = fighter->m_moduleAccesser->getControllerModule()->getButton();
+                ipPadButton currentButton = fighter->m_moduleAccesser->getControllerModule().getButton();
                 ipPadButton newButton = (ipPadButton){buttonMask.m_mask & currentButton.m_mask & ~prevButton.m_mask};
                 if (newButton.m_mask > 0) {
                     if (this->ocarinaSong->updateAndCheckIfComplete(newButton)) {

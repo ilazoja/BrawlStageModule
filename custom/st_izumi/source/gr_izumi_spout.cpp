@@ -143,7 +143,7 @@ void grIzumiSpout::fountainInit(u32 spoutId)
         this->level = Level_Active;
     }
 
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, AREA_SHAPE_FLAG_FOLLOW_NODE, 0, 0, this->getNodeIndex(0, "Trigger"), {0.0, 0.0}, izumiData->areaRange};
+    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, AREA_SHAPE_FLAG_FOLLOW_NODE, 0, 0, this->getNodeIndex(0, "Trigger"), Vec2f(0.0, 0.0), izumiData->areaRange};
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);
     trigger->setObserveYakumono(this->m_yakumono);
@@ -325,20 +325,20 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
                                 BaseItem *item = itemManager->createItem(kind, 5000);
                                 if (item != NULL) {
                                     item->warp(&triggerPos);
-                                    Vec3f speed = {0.0, SPOUT_ITEM_APPEAR_SPEED_Y, 0.0};
-                                    item->m_moduleAccesser->getKineticModule()->addSpeed(&speed,
+                                    Vec3f speed = Vec3f(0.0, SPOUT_ITEM_APPEAR_SPEED_Y, 0.0);
+                                    item->m_moduleAccesser->getKineticModule().addSpeed(&speed,
                                                                                          item->m_moduleAccesser);
                                 }
                             }
                         }
                         this->isItemObtained = true;
-                    } else if (fighter->m_moduleAccesser->getItemManageModule()->getHaveItemKind(0) == Item_StarRod &&
+                    } else if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
                                soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
-                        fighter->m_moduleAccesser->getItemManageModule()->getHaveItemInfo(&itemInfo, 0);
+                        fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
                             soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
-                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule()->getButton();
+                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealLw) {
                                 this->spoutTimer =
                                         randf() * (izumiData->sinkMaxFrames - izumiData->sinkMinFrames) +
@@ -353,13 +353,13 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
             else {
                 Fighter *fighter = g_ftManager->getFighter(entryId, -1);
                 if (fighter != NULL) {
-                    if (fighter->m_moduleAccesser->getItemManageModule()->getHaveItemKind(0) == Item_StarRod &&
+                    if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
                         soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
-                        fighter->m_moduleAccesser->getItemManageModule()->getHaveItemInfo(&itemInfo, 0);
+                        fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
                             soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
-                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule()->getButton();
+                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealHi) {
                                 this->spoutTimer = izumiData->riseWarningFrames;
                             }
@@ -383,13 +383,13 @@ void grIzumiSpout::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJ
             if (entryId >= 0) {
                 Fighter *fighter = g_ftManager->getFighter(entryId, -1);
                 if (fighter != NULL) {
-                    if (fighter->m_moduleAccesser->getItemManageModule()->getHaveItemKind(0) == Item_StarRod &&
+                    if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
                         soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
-                        fighter->m_moduleAccesser->getItemManageModule()->getHaveItemInfo(&itemInfo, 0);
+                        fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
                             soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
-                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule()->getButton();
+                            ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealHi) {
                                 this->destFrame += izumiData->spoutAscentSpeed;
                                 this->destFrame = hkMath::min2<float>(this->destFrame,

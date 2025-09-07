@@ -68,8 +68,8 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
     stSmashketballData* smashketballData = (stSmashketballData*)this->m_stageData;
     
     this->cannonData[index].motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, 0xFF, 0};
-    this->cannonData[index].areaOffsetPos = (Vec2f){0.0, 0.0};
-    this->cannonData[index].areaRange = (Vec2f){20.0, 15.0};
+    this->cannonData[index].areaOffsetPos = Vec2f(0.0, 0.0);
+    this->cannonData[index].areaRange = Vec2f(20.0, 15.0);
     this->cannonData[index].pos = smashketballData->cannonPosData[index].pos;
     this->cannonData[index].rot = smashketballData->cannonPosData[index].rot;
     this->cannonData[index].maxRot = 62.0;
@@ -101,7 +101,7 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
     this->cannonData[index].attackData.m_serialHitFrame = 0x3c;
     this->cannonData[index].attackData.m_soundLevel = soCollisionAttackData::Sound_Level_Medium;
     this->cannonData[index].attackData.m_soundAttribute = soCollisionAttackData::Sound_Attribute_Punch;
-    this->cannonData[index].attackData.m_unk5 = false;
+    this->cannonData[index].attackData.m_noScale = false;
     this->cannonData[index].attackData.m_shapeType = soCollision::Shape_Sphere;
     this->cannonData[index].attackData.m_nodeIndex = 0;
     this->cannonData[index].attackData.m_power = 0x1E;
@@ -139,8 +139,8 @@ void stSmashketball::update(float frameDelta){
         for (int i = 0; i < entryCount; i++) {
             int entryId = g_ftManager->getEntryIdFromIndex(i);
             Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-            if (fighter->m_moduleAccesser->getStatusModule()->getStatusKind() == 192) {
-                fighter->m_moduleAccesser->getGroundModule()->setCorrect(0,0);
+            if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == 192) {
+                fighter->m_moduleAccesser->getGroundModule().setCorrect(soGroundShapeImpl::Correct_None, 0);
             };
         }
     }

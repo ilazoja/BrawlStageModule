@@ -30,7 +30,7 @@ grQbertRed* grQbertRed::create(int mdlIndex, const char* tgtNodeName, const char
 void grQbertRed::setupAttack() {
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -83,8 +83,8 @@ void grQbertRed::setupAttack() {
 }
 
 void grQbertRed::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(7.0, &startOffsetPos, &endOffsetPos, 1, 1);
 }
 
@@ -185,7 +185,7 @@ void grQbertRed::onDamage(int index, soDamage* damage, soDamageAttackerInfo* att
         this->velocity = damage->m_reaction / 60;
 
         this->prevPos = this->getPos();
-        this->targetPos = (Vec3f){this->prevPos.m_x, this->stage->m_deadRange.m_down, 0};
+        this->targetPos = Vec3f(this->prevPos.m_x, this->stage->m_deadRange.m_down, 0);
 
         int teamId = damage->m_collisionLog.m_teamNo;
         if (attackerInfo->m_indirectSoKind == StageObject_Fighter) {

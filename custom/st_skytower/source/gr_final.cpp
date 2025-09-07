@@ -28,7 +28,7 @@ void grFinal::startup(gfArchive* data, u32 unk1, u32 unk2) {
         this->m_effects[0].m_repeatFrame = 0;
         this->m_effects[0].m_nodeIndex = this->getNodeIndex(0, "effect_locator");
         this->m_effects[0].m_endFrame = 0.0;
-        this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 0.0;
         this->startGimmickEffect(0);
     }

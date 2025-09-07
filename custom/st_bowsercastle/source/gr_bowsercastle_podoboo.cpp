@@ -24,14 +24,14 @@ void grBowserCastlePodoboo::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_soundEffects[i].m_repeatFrame = 0;
         this->m_soundEffects[i].m_nodeIndex = 0;
         this->m_soundEffects[i].m_endFrame = 0;
-        this->m_soundEffects[i].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_soundEffects[i].m_offsetPos = Vec2f(0.0, 0.0);
     }
     for (int i = 0; i < kNumPodobooSfxVariation; i++) {
         this->m_soundEffects[i + kNumPodobooSfxVariation].m_id = snd_se_stage_BowserCastle_Podoboo_Sink + i;
         this->m_soundEffects[i + kNumPodobooSfxVariation].m_repeatFrame = 0;
         this->m_soundEffects[i + kNumPodobooSfxVariation].m_nodeIndex = 0;
         this->m_soundEffects[i + kNumPodobooSfxVariation].m_endFrame = 0;
-        this->m_soundEffects[i + kNumPodobooSfxVariation].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_soundEffects[i + kNumPodobooSfxVariation].m_offsetPos = Vec2f(0.0, 0.0);
     }
 
     this->setMotionRatio(0.0);

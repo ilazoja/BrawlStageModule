@@ -23,7 +23,7 @@ void grLava::setupAttack() {
     grLavaData* lavaData = (grLavaData*)this->getStageData();
 
     float size = 1.0;
-    Vec3f offsetPos = {lavaData->width, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(lavaData->width, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -40,7 +40,7 @@ void grLava::setupAttack() {
 
     overwriteAttackData->m_nodeIndex = 0x1;
 
-    overwriteAttackData->m_category = COLLISION_CATEGORY_MASK_ALL;
+    overwriteAttackData->m_targetCategory = COLLISION_CATEGORY_MASK_ALL;
 
     overwriteAttackData->m_targetSituationODD = true;
     overwriteAttackData->m_targetSituationAir = true;

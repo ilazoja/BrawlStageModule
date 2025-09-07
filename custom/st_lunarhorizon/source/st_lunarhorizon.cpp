@@ -80,7 +80,7 @@ void stLunarHorizon::createObjBaseGround(int mdlIndex) {
 
         for (int i = coloursIndex + 1; i < greensIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjColour(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            this->createObjColour(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                     resNodeData->m_rotation.m_z, resNodeData->m_scale.m_z, resNodeData->m_translation.m_z,
                                     resNodeData->m_rotation.m_y, resNodeData->m_scale.m_x);
             this->numColourPlatforms++;
@@ -88,7 +88,7 @@ void stLunarHorizon::createObjBaseGround(int mdlIndex) {
         }
         for (int i = greensIndex + 1; i < endIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjYellow(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            this->createObjYellow(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                     resNodeData->m_rotation.m_z, resNodeData->m_scale.m_z, resNodeData->m_translation.m_z,
                                     resNodeData->m_rotation.m_y);
 

@@ -17,7 +17,7 @@ void grQbertBall::setStartPos() {
     this->targetIndex = STARTING_CUBE_INDEX + 1 + randi(2);
     grQbertCube* cube = (grQbertCube*)this->stage->getGround(this->targetIndex);
     cube->getNodePosition(&this->targetPos, 0, "Jumps");
-    this->prevPos = this->targetPos + (Vec3f){0, this->stage->m_deadRange.m_up + 10, 0};
+    this->prevPos = this->targetPos + Vec3f(0, this->stage->m_deadRange.m_up + 10, 0);
     this->midpointPos = this->prevPos;
     this->setPos(&this->prevPos);
 }
@@ -55,7 +55,7 @@ void grQbertBall::setTargetPos() {
         this->targetPos.m_y = this->stage->m_deadRange.m_down;
     }
 
-    this->midpointPos = (Vec3f){(this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2};
+    this->midpointPos = Vec3f((this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2);
     this->setAnim();
 }
 

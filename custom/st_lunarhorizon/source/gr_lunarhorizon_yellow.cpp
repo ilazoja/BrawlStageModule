@@ -13,15 +13,16 @@ grLunarHorizonYellow* grLunarHorizonYellow::create(int mdlIndex, const char* tgt
     return ground;
 }
 
-void grLunarHorizonYellow::startup(gfArchive* data, u32 unk1, u32 unk2) {
+void grLunarHorizonYellow::startup(gfArchive* data, u32 unk1, u32 unk2)
+{
     grMadein::startup(data, unk1, unk2);
     this->createSoundWork(1,1);
     this->m_soundEffects[0].m_id = snd_se_stage_Pictchat_missile_exp;
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
-
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
+}
 void grLunarHorizonYellow::update(float deltaFrame)
 {
     stLunarHorizonData* stageData = static_cast<stLunarHorizonData*>(this->getStageData());

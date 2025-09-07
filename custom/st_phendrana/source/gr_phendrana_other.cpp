@@ -26,7 +26,7 @@ void grPhendranaOther::startup(gfArchive* archive, u32 unk1, u32 unk2)
             this->m_effects[0].m_repeatFrame = simpleEffectData.m_repeatFrame;
             this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
             this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-            this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+            this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
             this->m_effects[0].m_scale = 1.0;
         }
     
@@ -40,7 +40,7 @@ void grPhendranaOther::startup(gfArchive* archive, u32 unk1, u32 unk2)
         this->m_soundEffects[0].m_repeatFrame = 0;
         this->m_soundEffects[0].m_nodeIndex = this->getNodeIndex(0, "Effect");
         this->m_soundEffects[0].m_endFrame = 0;
-        this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
 
         this->startGimmickSE(0);
     }

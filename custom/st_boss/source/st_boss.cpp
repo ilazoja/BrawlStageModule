@@ -31,12 +31,8 @@ void stBoss::notifyEventInfoGo() {
     emWeaponManager::create();
     emWeaponManager* weaponManager = emWeaponManager::getInstance();
     weaponManager->clean();
-    weaponManager->m_list1.m_last = NULL;
-    weaponManager->m_list1.m_first = NULL;
-    weaponManager->m_list1.m_length = 0;
-    weaponManager->m_list2.m_last = NULL;
-    weaponManager->m_list2.m_first = NULL;
-    weaponManager->m_list2.m_length = 0;
+    weaponManager->m_list1.clear();
+    weaponManager->m_list2.clear();
     weaponManager->m_numStageObjects = NUM_WEAPON_STAGE_OBJECTS
     weaponManager->m_stageObjects = new (Heaps::StageInstance) wnemSimple[weaponManager->m_numStageObjects];
     for (int i = 0; i < weaponManager->m_numStageObjects; i++) {
@@ -99,7 +95,7 @@ void stBoss::update(float deltaFrame)
 
                         Vec3f pos;
                         ground->getNodePosition(&pos, 0, chosenNodeIndex);
-                        create.m_startPos = (Vec3f){pos.m_x, pos.m_y, 0.0};
+                        create.m_startPos = Vec3f(pos.m_x, pos.m_y, 0.0);
 
                         create.m_startLr = resNodeData->m_translation.m_z;
                         create.m_level = 1;

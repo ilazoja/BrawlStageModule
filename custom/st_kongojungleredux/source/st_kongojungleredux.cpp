@@ -61,7 +61,7 @@ Ground* stKongoJungleRedux::createObjGround(int mdlIndex) {
         u32 capturePointsIndex = ground->getNodeIndex(0, "End");
         for (int i = platformsIndex + 1; i < cannonsIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjPlatform(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            this->createObjPlatform(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                     resNodeData->m_rotation.m_z, resNodeData->m_scale.m_x, resNodeData->m_translation.m_z,
                                     resNodeData->m_rotation.m_y);
 
@@ -71,14 +71,14 @@ Ground* stKongoJungleRedux::createObjGround(int mdlIndex) {
             u32 rotateFlags = resNodeData->m_scale.m_y;
             bool alwaysRotate = rotateFlags & 1;
             bool fullRotate = rotateFlags & 2;
-            grAdventureBarrelCannon* cannon = this->createObjCannon(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            grAdventureBarrelCannon* cannon = this->createObjCannon(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                     resNodeData->m_rotation.m_z, resNodeData->m_rotation.m_y, resNodeData->m_scale.m_z,
                                     resNodeData->m_translation.m_z, alwaysRotate, fullRotate, resNodeData->m_scale.m_x);
 
             resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i + 1).ptr();
             if (resNodeData->m_rotation.m_x > 0) {
 
-                grPlatform* platform = this->createObjPlatform(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+                grPlatform* platform = this->createObjPlatform(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                         resNodeData->m_rotation.m_z, resNodeData->m_scale.m_x, resNodeData->m_translation.m_z,
                                         resNodeData->m_rotation.m_y);
                 cannon->attachGround(platform);

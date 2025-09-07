@@ -29,7 +29,7 @@ grQbertGreen* grQbertGreen::create(int mdlIndex, const char* tgtNodeName, const 
 void grQbertGreen::setupAttack() {
 
     float size = 4.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 

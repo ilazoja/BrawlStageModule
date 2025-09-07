@@ -29,12 +29,8 @@ void stSkyPillar::notifyEventInfoGo() {
     emWeaponManager::create();
     emWeaponManager* weaponManager = emWeaponManager::getInstance();
     weaponManager->clean();
-    weaponManager->m_list1.m_last = NULL;
-    weaponManager->m_list1.m_first = NULL;
-    weaponManager->m_list1.m_length = 0;
-    weaponManager->m_list2.m_last = NULL;
-    weaponManager->m_list2.m_first = NULL;
-    weaponManager->m_list2.m_length = 0;
+    weaponManager->m_list1.clear();
+    weaponManager->m_list2.clear();
     weaponManager->m_numStageObjects = 0xf; //0x1e;
     weaponManager->m_stageObjects = new (Heaps::StageInstance) wnemSimple[weaponManager->m_numStageObjects];
     for (int i = 0; i < weaponManager->m_numStageObjects; i++) {
@@ -65,7 +61,7 @@ void stSkyPillar::update(float frameDiff)
             create.m_difficulty = 15;
             create.m_enemyKind = Enemy_Kuribo;
             create.m_startStatusKind = 2;
-            create.m_startPos = (Vec3f){70.0, 0.01, 0.0};
+            create.m_startPos = Vec3f(70.0, 0.01, 0.0);
             create.m_startLr = -1.0; //1.0;
             create.m_level = 1;
             create.m_36 = 0.0;

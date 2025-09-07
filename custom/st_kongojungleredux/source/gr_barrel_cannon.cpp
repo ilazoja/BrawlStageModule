@@ -90,7 +90,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
     {
         (this->m_modelAnims[0])->unbindNodeAnim(this->m_sceneModels[0]);
     }
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, stageData->cannonAreaOffsetPos.m_x, stageData->cannonAreaOffsetPos.m_y, stageData->cannonAreaRange.m_x, stageData->cannonAreaRange.m_y};
+    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(stageData->cannonAreaOffsetPos.m_x, stageData->cannonAreaOffsetPos.m_y), Vec2f(stageData->cannonAreaRange.m_x, stageData->cannonAreaRange.m_y)};
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger;
     switch (this->kind) {
@@ -123,7 +123,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
             this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
         }
         this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 1.0;
     }
     this->createSimpleEffectData(&simpleEffectData, stageData->cannonExplodeEffectId, "ExplodePos");
@@ -137,7 +137,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
             this->m_effects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
         }
         this->m_effects[1].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[1].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[1].m_scale = 1.0;
     }
     this->createSimpleEffectData(&simpleEffectData, ef_ptc_common_star_rod_shibuki, "SparklePos");
@@ -151,7 +151,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
             this->m_effects[2].m_nodeIndex = simpleEffectData.m_nodeIndex;
         }
         this->m_effects[2].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[2].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[2].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[2].m_scale = 1.0;
     }
 
@@ -160,22 +160,22 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_ADVstage_common_04;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = 0;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[2].m_id = snd_se_ADVstage_common_08;
     this->m_soundEffects[2].m_repeatFrame = 0;
     this->m_soundEffects[2].m_nodeIndex = 0;
     this->m_soundEffects[2].m_endFrame = 0;
-    this->m_soundEffects[2].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[2].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[3].m_id = stageData->cannonExplodeSfxId;
     this->m_soundEffects[3].m_repeatFrame = 0;
     this->m_soundEffects[3].m_nodeIndex = 0;
     this->m_soundEffects[3].m_endFrame = 0;
-    this->m_soundEffects[3].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[3].m_offsetPos = Vec2f(0.0, 0.0);
     this->createSimpleEffectData(&simpleEffectData, ef_ptc_adv_cmn_add, "effect_locator");
     u32 visProdIndex = 4;
     this->createEffectVisibleProductionForExcel(&simpleEffectData, &visProdIndex, this->m_visibleProductions);
@@ -259,7 +259,7 @@ void grAdventureBarrelCannon::processFixPosition() {
                             cannonEventInfo.m_kind = Gimmick::Barrel_Event_Set_Speed;
                             cannonEventInfo.m_sendID = 0;
                             cannonEventInfo.m_attackData = NULL;
-                            cannonEventInfo.m_pos = (Vec3f){0.0,0.0,0.0};
+                            cannonEventInfo.m_pos = Vec3f(0.0,0.0,0.0);
                             cannonEventInfo.m_rot = this->getRot().m_z;
                             cannonEventInfo.m_shootSpeed = this->cannonStaticData->shootSpeed;
                             cannonEventInfo.m_shootTimerSpeed = this->cannonStaticData->shootTimerSpeed;
@@ -283,7 +283,7 @@ void grAdventureBarrelCannon::processFixPosition() {
                                 cannonEventInfo.m_kind = Gimmick::Barrel_Event_End_Path;
                                 cannonEventInfo.m_sendID = 0;
                                 cannonEventInfo.m_attackData = NULL;
-                                cannonEventInfo.m_pos = (Vec3f){0.0,0.0,0.0};
+                                cannonEventInfo.m_pos = Vec3f(0.0,0.0,0.0);
                                 this->m_yakumono->presentEventGimmick(&cannonEventInfo, this->cannonPlayerInfos[i].sendID);
                                 this->cannonPlayerInfos[i].isActive = false;
                             }
@@ -297,7 +297,7 @@ void grAdventureBarrelCannon::processFixPosition() {
                         this->startGimmickEffect(0);
                         this->startGimmickSE(1);
 
-                        Vec3f pos = {0,-100,0};
+                        Vec3f pos = Vec3f(0,-100,0);
                         g_ecMgr->setDrawPrio(1);
                         this->effectIndex = g_ecMgr->setEffect((EfID)0x3c0003, &pos);
                         g_ecMgr->setDrawPrio(0xffffffff);
@@ -315,7 +315,7 @@ void grAdventureBarrelCannon::processFixPosition() {
                     else {
                         cannonEventInfo.m_kind = Gimmick::Barrel_Event_End_Path;
                         cannonEventInfo.m_sendID = 0;
-                        cannonEventInfo.m_pos = (Vec3f){0.0,0.0,0.0};
+                        cannonEventInfo.m_pos = Vec3f(0.0,0.0,0.0);
                         cannonEventInfo.m_attackData = NULL;
                         this->m_yakumono->presentEventGimmick(&cannonEventInfo, this->cannonPlayerInfos[i].sendID);
                     }
@@ -405,14 +405,14 @@ void grAdventureBarrelCannon::update(float frameDelta)
         if (g_ftManager->isFighterActivate(entryId, -1)) {
             Fighter* fighter = g_ftManager->getFighter(entryId, -1);
             if (!stageData->isCannonTether) {
-                if (fighter->m_moduleAccesser->getStatusModule()->getStatusKind() == 129) {
-                    fighter->m_moduleAccesser->getWorkManageModule()->setInt(2, 0x1000000e);
+                if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == 129) {
+                    fighter->m_moduleAccesser->getWorkManageModule().setInt(2, 0x1000000e);
                 };
             }
 
-            if (fighter->m_moduleAccesser->getStatusModule()->getStatusKind() == 192 && fighter->m_moduleAccesser->getWorkManageModule()->getInt(0x20000000) != 0) {
+            if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == 192 && fighter->m_moduleAccesser->getWorkManageModule().getInt(0x20000000) != 0) {
                 if (!stageData->isCannonInvincibility) {
-                    fighter->m_moduleAccesser->getCollisionHitModule()->setWhole(0, 0);
+                    fighter->m_moduleAccesser->getCollisionHitModule().setWhole(0, 0);
                 }
                 int maxJumps = soValueAccesser::getValueInt(fighter->m_moduleAccesser, 0x59db, 0);
                 if (stageData->cannonNumJumps != 0xff) {
@@ -420,7 +420,7 @@ void grAdventureBarrelCannon::update(float frameDelta)
                     if (jumps < 0) {
                         jumps = 0;
                     }
-                    fighter->m_moduleAccesser->getWorkManageModule()->setInt(jumps, 0x10000001);
+                    fighter->m_moduleAccesser->getWorkManageModule().setInt(jumps, 0x10000001);
                 }
             }
 
@@ -434,9 +434,9 @@ void grAdventureBarrelCannon::updateMove(float frameDelta)
 {
     stCannonData* stageData = static_cast<stCannonData*>(this->getStageData());
 
-    Vec3f pos = (Vec3f){0, 0, 0};
-    Vec3f rot = (Vec3f){0, 0, 0};
-    Vec3f scale = (Vec3f){0, 0, 0};
+    Vec3f pos = Vec3f(0, 0, 0);
+    Vec3f rot = Vec3f(0, 0, 0);
+    Vec3f scale = Vec3f(0, 0, 0);
     if (this->m_gimmickMotionPath != NULL) {
         this->m_gimmickMotionPath->getTRS(&pos, &rot, &scale);
     }
@@ -578,7 +578,7 @@ void grAdventureBarrelCannon::presentShootEvent(int playerCannonIndex)
     attackData.m_power = 5;
     attackData.m_vector = 90;
     attackData.m_size = 1;
-    attackData.m_offsetPos = (Vec3f){0.0, 0.0, 0.0};
+    attackData.m_offsetPos = Vec3f(0.0, 0.0, 0.0);
     attackData.m_hitStopFrame = 1.0;
     attackData.m_slipChance = 1.0;
     attackData.m_hitStopDelay = 1.0;

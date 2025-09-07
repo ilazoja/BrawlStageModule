@@ -26,7 +26,7 @@ void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_effects[0].m_repeatFrame = simpleEffectData.m_repeatFrame;
         this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
         this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 1.0;
     }
     this->createSimpleEffectData(&simpleEffectData, (EfID)0x2b, "Effect");
@@ -35,7 +35,7 @@ void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_effects[1].m_repeatFrame = simpleEffectData.m_repeatFrame;
         this->m_effects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
         this->m_effects[1].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[1].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[1].m_scale = 1.0;
     }
 
@@ -44,12 +44,12 @@ void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_stage_BowserCastle_Brick_Spawn;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->setupHitPoint();
 
@@ -62,8 +62,8 @@ void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, u32 unk2) {
 }
 
 void grBowserCastleBrick::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(1.0, &startOffsetPos, &endOffsetPos, 1, this->getNodeIndex(0, "Hit"));
 }
 

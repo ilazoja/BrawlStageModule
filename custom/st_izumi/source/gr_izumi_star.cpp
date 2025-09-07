@@ -34,7 +34,7 @@ void grIzumiStar::startup(gfArchive* archive, u32 unk1, u32 unk2) {
             this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
         }
         this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 1.0;
     }
 
@@ -49,7 +49,7 @@ void grIzumiStar::startup(gfArchive* archive, u32 unk1, u32 unk2) {
             this->m_effects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
         }
         this->m_effects[1].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[1].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[1].m_scale = 1.0;
     }
 
@@ -58,12 +58,12 @@ void grIzumiStar::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_stage_Izumi_Tangible_Star_Exit;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = 0;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->setTimer();
 }

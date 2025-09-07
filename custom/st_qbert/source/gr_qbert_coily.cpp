@@ -31,7 +31,7 @@ grQbertCoily* grQbertCoily::create(int mdlIndex, const char* tgtNodeName, const 
 void grQbertCoily::setupAttack() {
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -84,8 +84,8 @@ void grQbertCoily::setupAttack() {
 }
 
 void grQbertCoily::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(7.0, &startOffsetPos, &endOffsetPos, 1, 1);
 }
 
@@ -93,7 +93,7 @@ void grQbertCoily::setStartPos() {
     this->targetIndex = STARTING_CUBE_INDEX + 1 + randi(2);
     grQbertCube* cube = (grQbertCube*)this->stage->getGround(this->targetIndex);
     cube->getNodePosition(&this->targetPos, 0, "Jumps");
-    this->prevPos = this->targetPos + (Vec3f){0, this->stage->m_deadRange.m_up + 10, 0};
+    this->prevPos = this->targetPos + Vec3f(0, this->stage->m_deadRange.m_up + 10, 0);
     this->midpointPos = this->prevPos;
     this->setPos(&this->prevPos);
 }
@@ -118,7 +118,8 @@ void grQbertCoily::updateMove(float frameDelta) {
         this->timer += frameDelta;
         if (this->timer == qbertStageData->knockoutFrames) {
             this->soundGenerator.playSE(snd_se_stage_Madein_08, 0x0, 0x0, 0xffffffff);
-            cmReqQuake(cmQuake::Amplitude_M, &(Vec3f){0,0,0});
+            Vec3f quake = Vec3f(0,0,0);
+            cmReqQuake(cmQuake::Amplitude_M, &quake);
             if (this->attackerEntryId >= 0) {
                int team = g_ftManager->getTeam(this->attackerEntryId, false, false);
                 this->teamScoresWork[team] += COILY_POINTS;
@@ -226,12 +227,12 @@ void grQbertCoily::onDamage(int index, soDamage* damage, soDamageAttackerInfo* a
         this->prevPos = this->getPos();
         if (this->isHatched) {
             this->setMotionRatio(0.0);
-            this->targetPos = (Vec3f){this->prevPos.m_x, this->stage->m_deadRange.m_down, -500};
-            this->midpointPos = (Vec3f){this->prevPos.m_x, 110, this->prevPos.m_z};
+            this->targetPos = Vec3f(this->prevPos.m_x, this->stage->m_deadRange.m_down, -500);
+            this->midpointPos = Vec3f(this->prevPos.m_x, 110, this->prevPos.m_z);
             this->soundGenerator.playSE(snd_se_stage_Madein_good_03, 0x0, 0x0, 0xffffffff);
         }
         else {
-            this->targetPos = (Vec3f){this->prevPos.m_x, this->stage->m_deadRange.m_down, 0};
+            this->targetPos = Vec3f(this->prevPos.m_x, this->stage->m_deadRange.m_down, 0);
         }
     }
     if (attackerInfo->m_indirectSoKind == StageObject_Fighter) {
@@ -274,7 +275,7 @@ void grQbertCoily::setTargetPos() {
         }
     }
     if (this->isHatched) {
-        Vec3f targetPos = {0, 0, 0};
+        Vec3f targetPos = Vec3f(0, 0, 0);
         if (!this->enemyTarget->isDead) {
             // Pursue QBert
             targetPos = this->enemyTarget->targetPos;
@@ -306,7 +307,7 @@ void grQbertCoily::setTargetPos() {
 
     cube = (grQbertCube*)stage->getGround(this->targetIndex);
     cube->getNodePosition(&this->targetPos, 0, "Jumps");
-    this->midpointPos = (Vec3f){(this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2};
+    this->midpointPos = Vec3f((this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2);
 
     this->setAnim();
 }

@@ -16,8 +16,8 @@ grSoupBridge* grSoupBridge::create(int mdlIndex, const char* tgtNodeName, const 
 }
 
 void grSoupBridge::setupHitPoint() {
-    Vec3f startOffsetPos = {-20.0,0,0};
-    Vec3f endOffsetPos = {25.0,0,0};
+    Vec3f startOffsetPos = Vec3f(-20.0,0,0);
+    Vec3f endOffsetPos = Vec3f(25.0,0,0);
     this->setHitPoint(2.0, &startOffsetPos, &endOffsetPos, 1, 1);
 }
 
@@ -55,7 +55,7 @@ void grSoupBridge::updateBreak(float deltaFrame) {
 }
 
 void grSoupBridge::updateShake(float frameDelta) {
-    Vec3f shakeOffset = {0, 0, 0};
+    Vec3f shakeOffset = Vec3f(0, 0, 0);
     this->shakeTimer -= frameDelta;
     if (this->shakeTimer <= 0) {
         this->shakeTimer = 0;
@@ -66,7 +66,7 @@ void grSoupBridge::updateShake(float frameDelta) {
             float y;
             mtSinCosf(0, &y, &x);
             float shakeMul = 0.5 + 0.8*randf();
-            shakeOffset = (Vec3f){shakeMul*x, shakeMul*y, 0};
+            shakeOffset = Vec3f(shakeMul*x, shakeMul*y, 0);
         }
     }
     this->setPos(&shakeOffset);

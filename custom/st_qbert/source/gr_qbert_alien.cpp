@@ -29,7 +29,7 @@ grQbertAlien* grQbertAlien::create(int mdlIndex, const char* tgtNodeName, const 
 void grQbertAlien::setupAttack() {
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -82,8 +82,8 @@ void grQbertAlien::setupAttack() {
 }
 
 void grQbertAlien::setupHitPoint() {
-    Vec3f startOffsetPos = {0,0,0};
-    Vec3f endOffsetPos = {0,0,0};
+    Vec3f startOffsetPos = Vec3f(0,0,0);
+    Vec3f endOffsetPos = Vec3f(0,0,0);
     this->setHitPoint(7.0, &startOffsetPos, &endOffsetPos, 1, 1);
 }
 
@@ -129,7 +129,8 @@ void grQbertAlien::updateMove(float frameDelta) {
         if (this->timer == qbertStageData->knockoutFrames) {
             this->setNodeVisibility(false, 0, "EnemyM", false, false);
             this->soundGenerator.playSE(snd_se_stage_Madein_08, 0x0, 0x0, 0xffffffff);
-            cmReqQuake(cmQuake::Amplitude_M, &(Vec3f){0,0,0});
+            Vec3f quake = Vec3f(0,0,0);
+            cmReqQuake(cmQuake::Amplitude_M, &quake);
             if (this->teamId > 0 && this->teamId - 1 < NUM_PLAYERS) {
                 this->teamScoresWork[teamId - 1] += ALIEN_POINTS;
             }
@@ -224,8 +225,8 @@ void grQbertAlien::onDamage(int index, soDamage* damage, soDamageAttackerInfo* a
             this->setSleepAttack(true);
             this->setSleepHit(true);
             this->prevPos = this->getPos();
-            this->targetPos = (Vec3f){this->prevPos.m_x, this->stage->m_deadRange.m_down, -500};
-            this->midpointPos = (Vec3f){this->prevPos.m_x, 110, this->prevPos.m_z};
+            this->targetPos = Vec3f(this->prevPos.m_x, this->stage->m_deadRange.m_down, -500);
+            this->midpointPos = Vec3f(this->prevPos.m_x, 110, this->prevPos.m_z);
             this->soundGenerator.playSE(snd_se_stage_Madein_04, 0x0, 0x0, 0xffffffff);
             this->setMotionRatio(0.0);
         }
@@ -262,7 +263,7 @@ void grQbertAlien::setTargetPos() {
 
     cube = (grQbertCube*)stage->getGround(this->targetIndex);
     cube->getNodePosition(&this->targetPos, 0, "Jumps");
-    this->midpointPos = (Vec3f){(this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2};
+    this->midpointPos = Vec3f((this->prevPos.m_x + this->targetPos.m_x)/2, hkMath::max2(this->prevPos.m_y, this->targetPos.m_y) + 5, (this->prevPos.m_z + this->targetPos.m_z)/2);
 
     this->setAnim();
 }

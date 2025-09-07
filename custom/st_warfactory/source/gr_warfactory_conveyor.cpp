@@ -15,12 +15,15 @@ void grWarFactoryConveyor::startup(gfArchive* archive, u32 unk1, u32 unk2)
 {
     grYakumono::startup(archive, unk1, unk2);
     ConveyorGimmickData* conveyorGimmickData = (ConveyorGimmickData*)this->getGimmickData();
+    Vec3f pos = Vec3f(conveyorGimmickData->pos.m_x,conveyorGimmickData->pos.m_y,0);
+    Vec2f areaPos = Vec2f(0.0, 0.0);
+    Vec2f areaRange = Vec2f(conveyorGimmickData->range, 10.0);
     grGimmickBeltConveyorData beltConveyorAreaData(
-            &(Vec3f){conveyorGimmickData->pos.m_x,conveyorGimmickData->pos.m_y,0},
+            &pos,
             conveyorGimmickData->speed,
             conveyorGimmickData->isRightDirection,
-            &(Vec2f){0.0, 0.0},
-            &(Vec2f){conveyorGimmickData->range, 10.0},
+            &areaPos,
+            &areaRange,
             gfArea::Shape_Rectangle
     );
 

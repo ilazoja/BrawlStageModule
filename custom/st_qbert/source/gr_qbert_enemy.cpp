@@ -52,7 +52,7 @@ void grQbertEnemy::updateShake(float frameDelta) {
     this->shakeTimer -= frameDelta;
     if (this->shakeTimer <= 0) {
         this->shakeTimer = 0;
-        this->shakeOffset = (Vec3f){0, 0, 0};
+        this->shakeOffset = Vec3f(0, 0, 0);
     }
     else {
         if ((u32)this->shakeTimer % 3 == 0) {
@@ -60,7 +60,7 @@ void grQbertEnemy::updateShake(float frameDelta) {
             float y;
             mtSinCosf(0, &y, &x);
             float shakeMul = 0.5 + 0.8*randf();
-            this->shakeOffset = (Vec3f){shakeMul*x, shakeMul*y, 0};
+            this->shakeOffset = Vec3f(shakeMul*x, shakeMul*y, 0);
         }
     }
 }

@@ -27,9 +27,9 @@ void grPlatform::update(float deltaFrame)
 {
     grMadein::update(deltaFrame);
 
-    Vec3f pos = (Vec3f){0, 0, 0};
-    Vec3f rot = (Vec3f){0, 0, 0};
-    Vec3f scale = (Vec3f){0, 0, 0};
+    Vec3f pos = Vec3f(0, 0, 0);
+    Vec3f rot = Vec3f(0, 0, 0);
+    Vec3f scale = Vec3f(0, 0, 0);
     if (this->m_gimmickMotionPath != NULL) {
         this->m_gimmickMotionPath->getTRS(&pos, &rot, &scale);
         this->setRot(&rot);

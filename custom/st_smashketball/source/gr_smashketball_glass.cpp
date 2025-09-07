@@ -24,13 +24,13 @@ void grSmashketballGlass::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->m_soundEffects[1].m_id = snd_se_stage_Madein_03;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = 0;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
 
     this->initializeEntity();
     this->startEntity();
@@ -39,8 +39,8 @@ void grSmashketballGlass::startup(gfArchive* archive, u32 unk1, u32 unk2) {
 }
 
 void grSmashketballGlass::setupHitPoint() {
-    Vec3f startOffsetPos = {-5,0,0};
-    Vec3f endOffsetPos = {5,0,0};
+    Vec3f startOffsetPos = Vec3f(-5,0,0);
+    Vec3f endOffsetPos = Vec3f(5,0,0);
     this->setHitPoint(7.0, &startOffsetPos, &endOffsetPos, 1, 1);
 }
 

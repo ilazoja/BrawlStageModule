@@ -23,32 +23,32 @@ void grTempleOfTimeDoor::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_stage_Madein_04;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = 0;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[2].m_id = snd_se_stage_Madein_02;
     this->m_soundEffects[2].m_repeatFrame = 0;
     this->m_soundEffects[2].m_nodeIndex = 0;
     this->m_soundEffects[2].m_endFrame = 0;
-    this->m_soundEffects[2].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[2].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[3].m_id = snd_se_stage_Madein_03;
     this->m_soundEffects[3].m_repeatFrame = 0;
     this->m_soundEffects[3].m_nodeIndex = 0;
     this->m_soundEffects[3].m_endFrame = 0;
-    this->m_soundEffects[3].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[3].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[4].m_id = snd_se_stage_Madein_05;
     this->m_soundEffects[4].m_repeatFrame = 0;
     this->m_soundEffects[4].m_nodeIndex = 0;
     this->m_soundEffects[4].m_endFrame = 0;
-    this->m_soundEffects[4].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[4].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[5].m_id = snd_se_stage_Madein_06;
     this->m_soundEffects[5].m_repeatFrame = 0;
     this->m_soundEffects[5].m_nodeIndex = 0;
     this->m_soundEffects[5].m_endFrame = 0;
-    this->m_soundEffects[5].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[5].m_offsetPos = Vec2f(0.0, 0.0);
 
 }
 

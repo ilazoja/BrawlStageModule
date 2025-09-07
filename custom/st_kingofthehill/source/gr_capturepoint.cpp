@@ -28,27 +28,27 @@ void grCapturePoint::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = 0;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_ADVstage_common_LIFE_BALL_2;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = 0;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[2].m_id = snd_se_ADVstage_common_TOROKKO_FIRE;
     this->m_soundEffects[2].m_repeatFrame = 0;
     this->m_soundEffects[2].m_nodeIndex = 0;
     this->m_soundEffects[2].m_endFrame = 0;
-    this->m_soundEffects[2].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[2].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[3].m_id = snd_se_common_Countdown;
     this->m_soundEffects[3].m_repeatFrame = 0;
     this->m_soundEffects[3].m_nodeIndex = 0;
     this->m_soundEffects[3].m_endFrame = 0;
-    this->m_soundEffects[3].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[3].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[4].m_id = snd_se_ADVstage_common_55;
     this->m_soundEffects[4].m_repeatFrame = 0;
     this->m_soundEffects[4].m_nodeIndex = 0;
     this->m_soundEffects[4].m_endFrame = 0;
-    this->m_soundEffects[4].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[4].m_offsetPos = Vec2f(0.0, 0.0);
 
 
     this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, stageData->areaOffsetPos, stageData->areaRange};
@@ -160,7 +160,7 @@ void grCapturePoint::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
         stKingOfTheHillData* stageData = static_cast<stKingOfTheHillData*>(this->getStageData());
 
         Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-        if (!stageData->disableCapturesDuringShielding || fighter->m_moduleAccesser->getStatusModule()->getStatusKind() != Fighter::Status_Guard) {
+        if (!stageData->disableCapturesDuringShielding || fighter->m_moduleAccesser->getStatusModule().getStatusKind() != Fighter::Status_Guard) {
             this->applyMotionRate(stageData->bonusMotionSpeedMultipliers[this->bonusMultiplier - 1]);
             if (this->consecutiveFramesCaptured >= stageData->consecutiveFramesBeforeStartReward && int(this->consecutiveFramesCaptured) % stageData->rewardRate == 0) {
                 int lastChanceMultiplier = 1;

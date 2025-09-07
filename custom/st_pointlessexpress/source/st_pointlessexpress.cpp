@@ -72,7 +72,7 @@ void stPointlessExpress::createObjSky(int mdlIndex) {
         u32 endIndex = ground->getNodeIndex(0, "End");
         for (int i = firesIndex + 1; i < endIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjFire(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy,
+            this->createObjFire(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(),
                                 resNodeData->m_rotation.m_z, resNodeData->m_scale.m_z, resNodeData->m_translation.m_z, resNodeData->m_scale.m_x, resNodeData->m_rotation.m_y, resNodeData->m_scale.m_y);
         }
     }

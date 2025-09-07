@@ -32,7 +32,7 @@ void grGhostHouseFishing::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_effects[0].m_repeatFrame = simpleEffectData.m_repeatFrame;
         this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
         this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[0].m_offsetPos = (Vec2f) {0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 1.0;
     }
 }
@@ -41,7 +41,7 @@ void grGhostHouseFishing::setupAttack() {
     stGhostHouseData* ghostHouseData = static_cast<stGhostHouseData*>(this->getStageData());
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 0.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -137,7 +137,7 @@ void grGhostHouseFishing::updateState(float deltaFrame) {
             if (g_ftManager->isFighterActivate(this->targetEntryId, -1)) {
                 Vec3f targetPos = g_ftManager->getFighterCenterPos(this->targetEntryId, -1);
                 targetPos.m_y = (this->northEastPos->m_y + this->southWestPos->m_y) / 2;
-                this->moveToTarget(&targetPos.m_xy, &ghostHouseData->fishingStalkMaxSpeed, &ghostHouseData->fishingStalkAccel, deltaFrame);
+                this->moveToTarget(targetPos.xy(), &ghostHouseData->fishingStalkMaxSpeed, &ghostHouseData->fishingStalkAccel, deltaFrame);
 
                 if (this->timer > 0) {
                     this->timer -= deltaFrame;
@@ -159,12 +159,11 @@ void grGhostHouseFishing::updateState(float deltaFrame) {
                 this->changeState(State_Bait);
             }
             else {
-                Vec3f targetPos = (Vec3f) {
+                Vec3f targetPos = Vec3f(
                         this->speed.m_x >= 0.0 ? this->northEastPos->m_x : this->southWestPos->m_x,
                         (this->northEastPos->m_y + this->southWestPos->m_y) / 2,
-                        0.0
-                };
-                this->moveToTarget(&targetPos.m_xy, &ghostHouseData->fishingBaitMaxSpeed, &ghostHouseData->fishingBaitAccel, deltaFrame);
+                        0.0);
+                this->moveToTarget(targetPos.xy(), &ghostHouseData->fishingBaitMaxSpeed, &ghostHouseData->fishingBaitAccel, deltaFrame);
             }
         }
 
@@ -197,21 +196,21 @@ void grGhostHouseFishing::moveToTarget(Vec2f* targetPos, Vec2f* maxSpeed, Vec2f*
 
     Vec2f rotDir;
     if (this->speed.m_x > 0) {
-        rotDir = (Vec2f){1.0, 0.0};
+        rotDir = Vec2f(1.0, 0.0);
     }
     else {
-        rotDir = (Vec2f){-1.0, 0.0};
+        rotDir = Vec2f(-1.0, 0.0);
     }
 
     this->rotateToDisp(&rotDir, ghostHouseData->booRot, deltaFrame * BOO_ROT_SPEED);
-    currentPos.m_xy += this->speed;
+    *currentPos.xy() += this->speed;
     this->setPos(&currentPos);
 }
 
 void grGhostHouseFishing::moveItem(BaseItem* item) {
     Vec3f pos;
     this->getNodePosition(&pos, 0, "Item");
-    item->m_moduleAccesser->getGroundModule()->setCorrect(soGroundShapeImpl::Correct_None, 0);
+    item->m_moduleAccesser->getGroundModule().setCorrect(soGroundShapeImpl::Correct_None, 0);
     item->warp(&pos);
 }
 
@@ -251,17 +250,16 @@ void grGhostHouseFishing::changeState(State state) {
                 this->setNodeVisibilityAll(false, 0);
                 this->setSleepAttack(true);
                 this->stopGimmickEffect(0);
-                Vec3f startPos = {
+                Vec3f startPos = Vec3f(
                         randi(2) == 1 ? this->southWestPos->m_x : this->northEastPos->m_x,
                         randf() * (this->northEastPos->m_y - this->southWestPos->m_y) + this->southWestPos->m_y,
-                        0.0
-                };
+                        0.0);
                 this->setPos(&startPos);
             }
                 break;
             case State_Bait:
             {
-                this->speed = (Vec2f){0.0, 0.0};
+                this->speed = Vec2f(0.0, 0.0);
                 this->setNodeVisibilityAll(true, 0);
                 this->setSleepAttack(true);
                 this->stopGimmickEffect(0);

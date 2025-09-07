@@ -65,12 +65,12 @@ void stBowserCastle::createObjAshiba(int mdlIndex) {
 
         for (int i = thwompsIndex + 1; i < bricksIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjThwomp(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, &resNodeData->m_translation.m_xy, resNodeData->m_rotation.m_z, resNodeData->m_scale.m_z, &resNodeData->m_scale.m_xy);
+            this->createObjThwomp(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, resNodeData->m_translation.xy(), resNodeData->m_rotation.m_z, resNodeData->m_scale.m_z, resNodeData->m_scale.xy());
             this->numThwomps++;
         }
         for (int i = bricksIndex + 1; i < podoboosIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjBrick(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, &resNodeData->m_translation.m_xy, resNodeData->m_scale.m_y, resNodeData->m_scale.m_z);
+            this->createObjBrick(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, resNodeData->m_translation.xy(), resNodeData->m_scale.m_y, resNodeData->m_scale.m_z);
         }
         for (int i = podoboosIndex + 1; i < endIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();

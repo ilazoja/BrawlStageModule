@@ -32,7 +32,7 @@ void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_effects[0].m_repeatFrame = simpleEffectData.m_repeatFrame;
         this->m_effects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
         this->m_effects[0].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[0].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[0].m_scale = 1.0;
     }
     this->createSimpleEffectData(&simpleEffectData, (EfID)0x320004, "EffectDrop");
@@ -41,7 +41,7 @@ void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, u32 unk2) {
         this->m_effects[1].m_repeatFrame = simpleEffectData.m_repeatFrame;
         this->m_effects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
         this->m_effects[1].m_endFrame = simpleEffectData.m_endFrame;
-        this->m_effects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+        this->m_effects[1].m_offsetPos = Vec2f(0.0, 0.0);
         this->m_effects[1].m_scale = 1.0;
     }
 
@@ -50,28 +50,28 @@ void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[0].m_repeatFrame = 0;
     this->m_soundEffects[0].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[0].m_endFrame = 0;
-    this->m_soundEffects[0].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[0].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[1].m_id = snd_se_stage_BowserCastle_Thwomp_Shake;
     this->m_soundEffects[1].m_repeatFrame = 0;
     this->m_soundEffects[1].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[1].m_endFrame = 0;
-    this->m_soundEffects[1].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[1].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[2].m_id = snd_se_stage_BowserCastle_Thwomp_Land;
     this->m_soundEffects[2].m_repeatFrame = 0;
     this->m_soundEffects[2].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[2].m_endFrame = 0;
-    this->m_soundEffects[2].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[2].m_offsetPos = Vec2f(0.0, 0.0);
     this->m_soundEffects[3].m_id = snd_se_stage_BowserCastle_Thwomp_Stomp;
     this->m_soundEffects[3].m_repeatFrame = 0;
     this->m_soundEffects[3].m_nodeIndex = simpleEffectData.m_nodeIndex;
     this->m_soundEffects[3].m_endFrame = 0;
-    this->m_soundEffects[3].m_offsetPos = (Vec2f){0.0, 0.0};
+    this->m_soundEffects[3].m_offsetPos = Vec2f(0.0, 0.0);
 
     Vec3f areaPosSW;
     Vec3f areaPosNE;
     this->getNodePosition(&areaPosSW, 0, "AreaSW");
     this->getNodePosition(&areaPosNE, 0, "AreaNE");
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, (areaPosSW + areaPosNE).m_xy / 2, (areaPosSW - areaPosNE).m_xy};
+    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, *(areaPosSW + areaPosNE).xy() / 2, *(areaPosSW - areaPosNE).xy()};
 
     this->setupAttack();
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, true);
@@ -97,7 +97,7 @@ void grBowserCastleThwomp::setType(u8 type) {
 void grBowserCastleThwomp::setupAttack() {
 
     float size = 1.0;
-    Vec3f offsetPos = {0.0, 100.0, 0.0};
+    Vec3f offsetPos = Vec3f(0.0, 100.0, 0.0);
     this->setAttack(size, &offsetPos);
     this->m_attackInfo->m_preset = 4;
 
@@ -161,8 +161,8 @@ void grBowserCastleThwomp::update(float deltaFrame){
                 Vec3f areaPosNE;
                 this->getNodePosition(&areaPosSW, 0, "AreaSW");
                 this->getNodePosition(&areaPosNE, 0, "AreaNE");
-                Vec2f areaNW = {areaPosSW.m_x, areaPosNE.m_y};
-                Vec2f areaSE = {areaPosNE.m_x, areaPosSW.m_y};
+                Vec2f areaNW = Vec2f(areaPosSW.m_x, areaPosNE.m_y);
+                Vec2f areaSE = Vec2f(areaPosNE.m_x, areaPosSW.m_y);
                 this->dangerZoneId = g_aiMgr->setDangerZone(&areaNW, &areaSE, this->dangerZoneId, 0, 0);
             }
             break;

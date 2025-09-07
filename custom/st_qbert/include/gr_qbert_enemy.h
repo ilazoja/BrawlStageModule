@@ -36,7 +36,7 @@ public:
         angle = 0;
         velocity = 0;
         shakeTimer = 0;
-        shakeOffset = (Vec3f){0, 0, 0};
+        shakeOffset = Vec3f(0, 0, 0);
         isStart = false;
         immobilizeTimer = 0;
         isDead = false;

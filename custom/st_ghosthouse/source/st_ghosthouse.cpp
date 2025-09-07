@@ -63,7 +63,7 @@ void stGhostHouse::createObj() {
     u32 endIndex = ground->getNodeIndex(0, "End");
     for (int i = planksIndex + 1; i < endIndex; i++) {
         nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-        this->createObjHole(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, &resNodeData->m_translation.m_xy, &resNodeData->m_scale, resNodeData->m_translation.m_z);
+        this->createObjHole(resNodeData->m_rotation.m_x, resNodeData->m_rotation.m_y, resNodeData->m_translation.xy(), &resNodeData->m_scale, resNodeData->m_translation.m_z);
         groundCount++;
     }
 
@@ -102,7 +102,7 @@ void stGhostHouse::createObj() {
     nw4r::g3d::ResNodeData* resNodeDataSW = ground->m_sceneModels[0]->m_resMdl.GetResNode(int(fishingNodeIndex + 1)).ptr();
     nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(int(fishingNodeIndex + 2)).ptr();
     for (int i = 0; i < ghostHouseData->numFishingBoos; i++) {
-        createObjFishing(13, &resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+        createObjFishing(13, resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
         groundCount++;
     }
     this->bigBooStartGroundIndex = groundCount;
@@ -256,7 +256,7 @@ void stGhostHouse::update(float deltaFrame){
         int entryId = g_ftManager->getEntryIdFromIndex(i);
         if (g_ftManager->isFighterActivate(entryId, -1)) {
             Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-            ipPadButton currentButton = fighter->m_moduleAccesser->getControllerModule()->getButton();
+            ipPadButton currentButton = fighter->m_moduleAccesser->getControllerModule().getButton();
             if (currentButton.m_appealLw) {
                 this->changeEvent(Event_StalkBig);
             }
@@ -309,9 +309,9 @@ void stGhostHouse::update(float deltaFrame){
                         eerieResNode = ground->m_sceneModels[0]->m_resMdl.GetResNode(int(nodeIndex + 1 + i)).ptr();
                         Vec3f startPos;
                         if (directionX > 0) {
-                            startPos = (Vec3f){resNodeDataSW->m_translation.m_x - eerieResNode->m_translation.m_x, startPosY + eerieResNode->m_translation.m_y, 0.0};
+                            startPos = Vec3f(resNodeDataSW->m_translation.m_x - eerieResNode->m_translation.m_x, startPosY + eerieResNode->m_translation.m_y, 0.0);
                         } else {
-                            startPos = (Vec3f){resNodeDataNE->m_translation.m_x + eerieResNode->m_translation.m_x, startPosY + eerieResNode->m_translation.m_y, 0.0};
+                            startPos = Vec3f(resNodeDataNE->m_translation.m_x + eerieResNode->m_translation.m_x, startPosY + eerieResNode->m_translation.m_y, 0.0);
                         }
 
                         float period = eerie->getPeriod();
@@ -320,7 +320,7 @@ void stGhostHouse::update(float deltaFrame){
                             startAnimFrame -= period;
                         }
 
-                        eerie->setActive(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy,
+                        eerie->setActive(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy(),
                                          &startPos, directionX, eerieResNode->m_rotation.m_z,
                                          startAnimFrame);
                     }
@@ -402,7 +402,7 @@ void stGhostHouse::startNextEvent() {
             nw4r::g3d::ResNodeData* resNodeDataNE = ground->m_sceneModels[0]->m_resMdl.GetResNode(int(nodeIndex + 2)).ptr();
 
             grGhostHouseBigBoo *boo = static_cast<grGhostHouseBigBoo*>(this->getGround(this->bigBooStartGroundIndex));
-            boo->setStalk(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+            boo->setStalk(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
         }
             break;
         case Event_Circle:
@@ -458,10 +458,10 @@ void stGhostHouse::startNextEvent() {
                 }
                 else {
                     if (chosenCircle == i) {
-                        Vec2f centerCircle = resNodeData->m_translation.m_xy;
+                        Vec2f centerCircle = *resNodeData->m_translation.xy();
                         Vec2f center = centerCircle;
                         if (numPlayersOnGround > 0) {
-                            center = g_ftManager->getFighterCenterPos(entryIds[randi(numPlayersOnGround)], -1).m_xy;
+                            center = *g_ftManager->getFighterCenterPos(entryIds[randi(numPlayersOnGround)], -1).xy();
                         }
 
                         if (int(resNodeData->m_rotation.m_x) > 0) {
@@ -484,7 +484,7 @@ void stGhostHouse::startNextEvent() {
                                 grGhostHouseBoo* boo = static_cast<grGhostHouseBoo*>(this->getGround(this->booStartGroundIndex + ghostHouseData->numEachBoos*(j % 4) + j/4));
 
                                 resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(int(nodeIndex + 1 + j)).ptr();
-                                float radius = centerCircle.distance(&resNodeData->m_translation.m_xy);
+                                float radius = centerCircle.distance(resNodeData->m_translation.xy());
                                 float angle = 2*M_PI*startRatio + atan2(resNodeData->m_translation.m_y, resNodeData->m_translation.m_x);
                                 boo->setCircle(&center, radius, angle, speed);
                             }
@@ -534,7 +534,7 @@ void stGhostHouse::startNextEvent() {
 
             for (int i = 0; i < ghostHouseData->numEachBoos*4; i++) {
                 grGhostHouseBoo* boo = static_cast<grGhostHouseBoo*>(this->getGround(this->booStartGroundIndex + i));
-                boo->setCrew(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+                boo->setCrew(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
             }
         }
             break;
@@ -547,7 +547,7 @@ void stGhostHouse::startNextEvent() {
 
             for (int i = 0; i < ghostHouseData->numEachBoos*4; i++) {
                 grGhostHouseBoo* boo = static_cast<grGhostHouseBoo*>(this->getGround(this->booStartGroundIndex + i));
-                boo->setDisappear(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+                boo->setDisappear(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
             }
         }
             break;
@@ -560,7 +560,7 @@ void stGhostHouse::startNextEvent() {
 
             for (int i = 0; i < ghostHouseData->numBubbles; i++) {
                 grGhostHouseBubble* bubble = static_cast<grGhostHouseBubble*>(this->getGround(this->bubbleStartGroundIndex + i));
-                bubble->setActive(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+                bubble->setActive(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
             }
         }
             break;
@@ -576,7 +576,7 @@ void stGhostHouse::startNextEvent() {
 
             for (int i = 0; i < ghostHouseData->numFishingBoos; i++) {
                 grGhostHouseFishing* fishing = static_cast<grGhostHouseFishing*>(this->getGround(this->fishingBooStartGroundIndex + i));
-                fishing->setActive(&resNodeDataSW->m_translation.m_xy, &resNodeDataNE->m_translation.m_xy);
+                fishing->setActive(resNodeDataSW->m_translation.xy(), resNodeDataNE->m_translation.xy());
             }
         }
             break;

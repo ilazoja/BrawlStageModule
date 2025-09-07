@@ -60,7 +60,7 @@ Ground* stGyromite::createObjGround(int mdlIndex) {
         u32 capturePointsIndex = ground->getNodeIndex(0, "End");
         for (int i = laddersIndex + 1; i < capturePointsIndex; i++) {
             nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-            this->createObjLadder(resNodeData->m_rotation.m_x, &resNodeData->m_translation.m_xy, resNodeData->m_translation.m_z,
+            this->createObjLadder(resNodeData->m_rotation.m_x, resNodeData->m_translation.xy(), resNodeData->m_translation.m_z,
                                   resNodeData->m_rotation.m_y, resNodeData->m_rotation.m_z);
         }
     }
@@ -72,9 +72,11 @@ void stGyromite::createObjLadder(int mdlIndex, Vec2f* pos, int motionPathIndex, 
     grLadder* ladder = grLadder::create(mdlIndex, "grLadder");
     if (ladder != NULL) {
         addGround(ladder);
+        Vec2f areaPos = Vec2f(0.0, 0.0);
+        Vec2f areaRange = Vec2f(0.0, 0.0);
         grGimmickLadderData ladderData(
                 mdlIndex, 0, restrictUpExit, unk2, "",
-                &(Vec2f){0.0, 0.0}, &(Vec2f){0.0, 0.0}
+                &areaPos, &areaRange
         );
         ladder->setMotionPathData(motionPathIndex);
         ladder->startupLadder(this->m_fileData,0,0,&ladderData);

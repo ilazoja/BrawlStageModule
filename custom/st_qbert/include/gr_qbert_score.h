@@ -15,7 +15,7 @@ class grQbertScore : public grYakumono
         grQbertScore(const char* taskName) : grYakumono(taskName) {
             prevScore = 999999;
             m_motionRatio = 0.0;
-            scaleBase = (Vec3f){0.0, 0.0, 0.0};
+            scaleBase = Vec3f(0.0, 0.0, 0.0);
             if (&m_calcWorldCallBack != NULL) {
                 m_calcWorldCallBack.m_numNodeCallbackData = 1;
                 m_calcWorldCallBack.initialize(false, Heaps::StageInstance);
