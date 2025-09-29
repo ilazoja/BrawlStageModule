@@ -54,7 +54,7 @@ public:
     };
     virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
     virtual void update(float deltaFrame);
-    virtual void onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId);
+    virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
     virtual ~grCapturePoint(){};
     virtual void setCapturePointPositions(Ground* capturePointPositions);
     virtual void setGameRule(GameRule gameRule);

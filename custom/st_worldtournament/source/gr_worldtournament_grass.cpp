@@ -33,7 +33,7 @@ void grWorldTournamentGrass::update(float deltaFrame)
     }
 }
 
-void grWorldTournamentGrass::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
+void grWorldTournamentGrass::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
 {
     this->collTimer = 2.0;
     this->setEnableCollisionStatus(true); // Enable collision only when close to grass so that CPU does not want to go on it

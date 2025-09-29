@@ -293,7 +293,7 @@ void grIzumiSpout::changeDestFrame() {
     }
 }
 
-void grIzumiSpout::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
+void grIzumiSpout::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
 {
     int entryId = g_ftManager->getEntryIdFromTaskId(*taskId, NULL);
     if (entryId >= 0) {

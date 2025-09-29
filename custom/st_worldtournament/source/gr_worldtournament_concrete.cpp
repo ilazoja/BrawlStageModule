@@ -26,7 +26,7 @@ void grWorldTournamentConcrete::update(float deltaFrame)
 
 }
 
-void grWorldTournamentConcrete::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
+void grWorldTournamentConcrete::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId) {
     Fighter* fighter = static_cast<Fighter*>(gfTask::getTask(*taskId));
     if (fighter != NULL) {
         Vec3f pos = soExternalValueAccesser::getPos(fighter);

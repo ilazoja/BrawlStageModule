@@ -14,7 +14,7 @@ public:
     };
     virtual ~grCheeseBridgeRope(){};
     virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
-    virtual void onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId);
+    virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
     virtual void getUpperNode(Vec3f* pos);
     virtual void getUnderNode(Vec3f* pos);
 

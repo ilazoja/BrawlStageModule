@@ -41,7 +41,7 @@ class grBowserCastleThwomp : public grMadein
         }
         virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
         virtual void update(float frameDiff);
-        virtual void onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId);
+        virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
         virtual void onInflictEach(soCollisionLog* collisionLog, float power);
         virtual void setShadow(grBowserCastleShadow* shadow);
         virtual void setType(u8 type);

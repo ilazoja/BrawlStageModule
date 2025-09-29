@@ -34,8 +34,8 @@ void grKrazoaLadder::startupLadder(gfArchive* archive, u32 unk1, u32 unk2, grGim
     this->createAttachMotionPath(&motionPathInfo, &triggerData, "MoveNode");
 }
 
-void grKrazoaLadder::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
-    soGimmickLadderEventInfo* ladderEventInfo = static_cast<soGimmickLadderEventInfo*>(eventInfo);
+void grKrazoaLadder::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId) {
+    soGimmickLadderEventArgs* ladderEventInfo = static_cast<soGimmickLadderEventArgs*>(eventInfo);
     switch(ladderEventInfo->m_kind) {
         case 0x14:
             this->getUpperNode(&ladderEventInfo->m_upperNodePos);

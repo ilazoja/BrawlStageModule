@@ -153,7 +153,7 @@ void grCapturePoint::update(float deltaFrame)
     }
 }
 
-void grCapturePoint::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId)
+void grCapturePoint::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
 {
     int entryId = g_ftManager->getEntryIdFromTaskId(*taskId, NULL);
     if (entryId >= 0) {

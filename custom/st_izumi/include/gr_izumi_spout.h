@@ -45,7 +45,7 @@ public:
     virtual void processAnim();
     virtual void update(float deltaFrame);
     virtual ~grIzumiSpout(){};
-    virtual void onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId);
+    virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
     virtual void receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3);
 
     virtual void fountainInit(u32 spoutId);

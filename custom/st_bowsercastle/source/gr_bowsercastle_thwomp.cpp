@@ -204,7 +204,7 @@ void grBowserCastleThwomp::update(float deltaFrame){
     this->isPlayerUnder = false;
 }
 
-void grBowserCastleThwomp::onGimmickEvent(soGimmickEventInfo* eventInfo, int* taskId) {
+void grBowserCastleThwomp::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId) {
     //if (!g_GameGlobal->m_modeMelee->m_meleeInitData.m_isHazardOff) {
         if (this->state != State_Stomp) {
             stBowserCastleData *stageData = static_cast<stBowserCastleData *>(this->getStageData());
