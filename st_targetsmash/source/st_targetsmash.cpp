@@ -9,7 +9,7 @@
 #include <em/em_weapon_manager.h>
 #include <mt/mt_prng.h>
 #include <MetroTRK.h>
-#include <math.h>
+#include <cmath>
 #include <ms/ms_message.h>
 #include <wchar.h>
 #include <ft/ft_manager.h>
@@ -24,6 +24,7 @@
 #include <gf/gf_slow_manager.h>
 #include <mt/mt_trig.h>
 #include <gf/gf_3d_scene.h>
+#include <cstdlib>
 
 static stClassInfoImpl<Stages::TBreak, stTargetSmash> classInfo = stClassInfoImpl<Stages::TBreak, stTargetSmash>();
 
@@ -60,7 +61,9 @@ void stTargetSmash::update(float deltaFrame)
             u32 endIndex = ground->getNodeIndex(0, "End");
             for (int i = itemsIndex + 1; i < endIndex; i++) {
                 nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
-                this->putEnemy(resNodeData->m_scale.m_x, resNodeData->m_scale.m_y, resNodeData->m_scale.m_z, resNodeData->m_translation.xy(), resNodeData->m_translation.m_z, resNodeData->m_rotation.m_z);
+                if (resNodeData->m_scale.m_x >= 0) {
+                    this->putEnemy(resNodeData->m_scale.m_x, resNodeData->m_scale.m_y, resNodeData->m_scale.m_z, resNodeData->m_translation.xy(), resNodeData->m_translation.m_z, resNodeData->m_rotation.m_z);
+                }
             }
 
             this->isEnemiesInitialized = true;
@@ -154,9 +157,14 @@ void stTargetSmash::createObj()
 
     gfModuleManager* moduleManager = gfModuleManager::getInstance();
     int size;
-    gfModuleHeader* moduleHeader = static_cast<gfModuleHeader*>(m_secondaryFileData->getData(Data_Type_Misc, 301, &size, 0xfffe));
+
+    this->createObjAshiba(0, 2);
+    gfModuleHeader* moduleHeader = static_cast<gfModuleHeader*>(m_secondaryFileData->getData(2, Data_Type_Misc, 1, &size, 0xfffe));
     if (moduleHeader != NULL) {
         moduleManager->loadModuleRequestOnImage("sora_enemy.rel", Heaps::OverlayStage, moduleHeader, &size);
+        strcpy(g_EnemyOverride.m_enmOverrideFolder, "Test");
+        strcpy(g_EnemyOverride.m_stageItemFolder, "Test2");
+        g_EnemyOverride.m_overrideCymul = Archive_Override_Both;
         emManager::create(0x1e,0x14,0);
         //gfHeapManager::dumpList();
         emWeaponManager::create();
@@ -172,20 +180,21 @@ void stTargetSmash::createObj()
         weaponManager->m_32 = false;
 
         emManager *enemyManager = emManager::getInstance();
-        for (u32 i = 0; i < NUM_ENEMY_TYPES; i++) {
+
+        Ground* ground = this->getGround(0);
+        u32 itemsIndex = ground->getNodeIndex(0, "Enemies");
+        u32 endIndex = ground->getNodeIndex(0, "End");
+        for (int i = itemsIndex + 1; i < endIndex; i++) {
+            nw4r::g3d::ResNodeData* resNodeData = ground->m_sceneModels[0]->m_resMdl.GetResNode(i).ptr();
             gfArchive* brres;
             gfArchive* param;
             gfArchive* enmCommon;
             gfArchive* primFaceBrres;
-            this->getEnemyPac(&brres, &param, &enmCommon, &primFaceBrres, (EnemyKind)i);
-            if (brres != NULL) {
-                int result = enemyManager->preloadArchive(param, brres, enmCommon, primFaceBrres, (EnemyKind) i, true);
-            }
+            EnemyKind enemyKind = (EnemyKind)abs(resNodeData->m_scale.m_x);
+            this->getEnemyPac(&brres, &param, &enmCommon, &primFaceBrres, enemyKind);
+            int result = enemyManager->preloadArchive(param, brres, enmCommon, primFaceBrres, enemyKind, true);
         }
-
     }
-
-    this->createObjAshiba(0, 2);
 
     initCameraParam();
     nw4r::g3d::ResFile posData(m_fileData->getData(Data_Type_Model, 0x64, 0xfffe));
@@ -271,7 +280,7 @@ void stTargetSmash::getItemPac(gfArchive** brres, gfArchive** param, itKind item
 }
 
 void stTargetSmash::getEnemyPac(gfArchive **brres, gfArchive **param, gfArchive **enmCommon, gfArchive **primFaceBrres, EnemyKind enemyID) {
-    int fileIndex = enemyID * 2;
+    int fileIndex = (enemyID & 0xff) * 2;
     int nodeSize;
     *primFaceBrres = NULL;
 
@@ -286,28 +295,28 @@ void stTargetSmash::getEnemyPac(gfArchive **brres, gfArchive **param, gfArchive 
     *param = this->enemyPacs[fileIndex];
 
     if (this->enemyCommonPac == NULL) {
-        void* enmCommonData = this->m_secondaryFileData->getData(Data_Type_Misc, 300, &nodeSize, (u32)0xfffe);
-        *enmCommon = new (Heaps::StageInstance) gfArchive();
-        (*enmCommon)->setFileImage(enmCommonData, nodeSize, Heaps::StageResource);
-        this->enemyCommonPac = *enmCommon;
+        void* enmCommonData = this->m_secondaryFileData->getData(2, Data_Type_Misc, 0, &nodeSize, (u32)0xfffe);
+        if (enmCommonData != NULL) {
+            *enmCommon = new (Heaps::StageInstance) gfArchive();
+            (*enmCommon)->setFileImage(enmCommonData, nodeSize, Heaps::StageResource);
+            this->enemyCommonPac = *enmCommon;
+        }
     }
-    else {
-        *enmCommon = this->enemyCommonPac;
-    }
+    *enmCommon = this->enemyCommonPac;
 
     if (*brres != NULL && (enemyID == Enemy_Prim || enemyID == Enemy_Prim_Metal || enemyID == Enemy_Prim_Big || enemyID == Enemy_Prim_Boomerang || enemyID == Enemy_Prim_SuperScope || enemyID == Enemy_Prim_Sword)) {
         if (this->primFacePac == NULL) {
-            void* primFaceData = this->m_secondaryFileData->getData(Data_Type_Misc, 200 + randi(NUM_PRIM_FACES), &nodeSize, (u32)0xfffe);
+            void* primFaceData = this->m_secondaryFileData->getData(Enemy_Prim + 3, Data_Type_Misc,  randi(NUM_PRIM_FACES), &nodeSize, (u32)0xfffe);
             if (primFaceData == NULL) {
-                primFaceData = this->m_secondaryFileData->getData(Data_Type_Misc, 200, &nodeSize, (u32)0xfffe);
+                primFaceData = this->m_secondaryFileData->getData(Enemy_Prim + 3, Data_Type_Misc, 0, &nodeSize, (u32)0xfffe);
             }
-            *primFaceBrres = new (Heaps::StageInstance) gfArchive();
-            (*primFaceBrres)->setFileImage(primFaceData, nodeSize, Heaps::StageResource);
-            this->primFacePac = *primFaceBrres;
+            if (primFaceData != NULL) {
+                *primFaceBrres = new (Heaps::StageInstance) gfArchive();
+                (*primFaceBrres)->setFileImage(primFaceData, nodeSize, Heaps::StageResource);
+                this->primFacePac = *primFaceBrres;
+            }
         }
-        else {
-            *primFaceBrres = this->primFacePac;
-        }
+        *primFaceBrres = this->primFacePac;
     }
 }
 
