@@ -80,7 +80,7 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
     this->cannonData[index].fullRotate = false;
     this->cannonData[index].alwaysRotate = false;
     this->cannonData[index].mdlIndex = mdlIndex;
-    this->cannonData[index].field_0xce = 0x8;
+    this->cannonData[index].breakHitstopFrame = 0x8;
     this->cannonData[index].enterCannonTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
     this->cannonData[index].motionPathTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
     this->cannonData[index].isValidTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };

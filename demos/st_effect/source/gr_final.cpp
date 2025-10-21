@@ -25,7 +25,7 @@ void grFinal::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint*
     CategoryFlag categoryFlag(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER);
     if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlag)) {
         Fighter* fighter = dynamic_cast<Fighter*>(stageObject);
-        if (fighter->m_moduleAccesser->getStatusModule()->getStatusKind() == 0x04) {
+        if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == 0x04) {
             Vec3f pos = ftExternalValueAccesser::getHipPos(fighter);
             g_ecMgr->setEffect((EfID)0x330001, &pos);
 

@@ -75,28 +75,27 @@ void grAdventureElevator::update(float deltaFrame)
 {
     grGimmick::update(deltaFrame);
     switch(this->state) {
-        case Elevator_State_Stop:
-            if (60.0 < this->timeSinceStartedMoving) {
-                this->state = Elevator_State_Rest;
-            }
-            break;
-        case Elevator_State_Move:
-            this->moveFloor();
-            break;
-        default:
-            break;
+    case Elevator_State_Stop:
+        if (60.0 < this->timeSinceStartedMoving) {
+            this->state = Elevator_State_Rest;
+        }
+        break;
+    case Elevator_State_Move:
+        this->moveFloor();
+        break;
+    default:
+        break;
     }
     this->timeSinceStartedMoving += deltaFrame;
     grGimmick::updateCallback(0);
-
 }
 
 void grAdventureElevator::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
 {
-    soGimmickElevatorEventArgs* elevatorEventInfo = (soGimmickElevatorEventArgs*)eventInfo;
     if (this->state == Elevator_State_Rest) {
-        switch(elevatorEventInfo->m_kind) {
-            case 0x2b:
+        switch(eventInfo->m_kind) {
+            case 0x2b: {
+                soGimmickElevatorEventArgs_On* elevatorEventInfo = (soGimmickElevatorEventArgs_On*)eventInfo;
                 if (this->prevFloor + 1 < this->numFloors) {
                     elevatorEventInfo->m_canGoUp = true;
                 }
@@ -109,6 +108,7 @@ void grAdventureElevator::onGimmickEvent(soGimmickEventArgs* eventInfo, int* tas
                 else {
                     elevatorEventInfo->m_canGoDown = true;
                 }
+            }
                 break;
             case 0x2c:
                 this->nextFloor = this->prevFloor + 1;
