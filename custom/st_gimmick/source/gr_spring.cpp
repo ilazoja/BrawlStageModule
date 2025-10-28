@@ -13,7 +13,7 @@ void grSpring::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     grGimmickSpring::startup(archive, unk1, unk2);
     this->m_bounce = this->m_springData->m_bounce; // Copy to struct so that springData can be changed
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
     this->createAttachMotionPath(&motionPathInfo, NULL, "MoveNode");
 }
 
@@ -37,6 +37,9 @@ void grSpring::update(float deltaFrame) {
                 this->presentShootEvent();
                 this->setMotionOff();
             }
+            break;
+        default:
+            break;
     }
     this->m_animFrame += deltaFrame;
     this->updateCallback(0);
@@ -50,7 +53,7 @@ void grSpring::presentShootEvent() {
 }
 
 void grSpring::setMotionPathData(int mdlIndex) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 
 }
 

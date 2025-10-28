@@ -19,7 +19,7 @@ grAdventureBarrelCannon* grAdventureBarrelCannon::create(int mdlIndex, BarrelCan
 void grAdventureBarrelCannon::prepareCannonData(Vec2f* pos, float rot, float rotSpeed, float maxRot, int motionPathIndex, bool alwaysRotate, bool fullRotate, float autoFireFrames) {
     stCannonData* stageData = static_cast<stCannonData*>(this->getStageData());
 
-    this->_cannonData.motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathIndex, 0};
+    this->_cannonData.motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathIndex, 0);
     this->_cannonData.pos = *pos;
     this->_cannonData.rot = rot;
     this->_cannonData.maxRot = maxRot;
@@ -28,9 +28,9 @@ void grAdventureBarrelCannon::prepareCannonData(Vec2f* pos, float rot, float rot
     this->_cannonData.fullRotate = fullRotate;
     this->_cannonData.alwaysRotate = alwaysRotate;
     this->_cannonData.breakHitstopFrame = 0x8;
-    this->_cannonData.enterCannonTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
-    this->_cannonData.motionPathTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
-    this->_cannonData.isValidTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
+    this->_cannonData.enterCannonTriggerData.set(0, true, stTriggerData::Keep_None);
+    this->_cannonData.motionPathTriggerData.set(0, true, stTriggerData::Keep_None);
+    this->_cannonData.isValidTriggerData.set(0, true, stTriggerData::Keep_None);
     this->_cannonData.attackData = stageData->cannonAttackData;
     this->_cannonData.shootSpeed = stageData->cannonShootSpeed;
     this->_cannonData.shootTimerSpeed = stageData->cannonShootTimerSpeed;
@@ -72,7 +72,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
     }
     this->cannonData->breakHitstopFrame = 8;
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->cannonData->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->cannonData->motionPathData, false, true);
     this->createAttachMotionPath(&motionPathInfo, &this->cannonData->motionPathTriggerData, "MoveNode");
     nw4r::g3d::ResAnmChrData* anmChr = this->m_resFile.GetResAnmChr(0).ptr();
     if (anmChr != NULL) {
@@ -90,7 +90,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
     {
         (this->m_modelAnims[0])->unbindNodeAnim(this->m_sceneModels[0]);
     }
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(stageData->cannonAreaOffsetPos.m_x, stageData->cannonAreaOffsetPos.m_y), Vec2f(stageData->cannonAreaRange.m_x, stageData->cannonAreaRange.m_y)};
+    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(stageData->cannonAreaOffsetPos.m_x, stageData->cannonAreaOffsetPos.m_y), Vec2f(stageData->cannonAreaRange.m_x, stageData->cannonAreaRange.m_y));
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger;
     switch (this->kind) {

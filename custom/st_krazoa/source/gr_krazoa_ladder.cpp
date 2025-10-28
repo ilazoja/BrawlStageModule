@@ -21,7 +21,7 @@ void grKrazoaLadder::startupLadder(gfArchive* archive, u32 unk1, u32 unk2, grGim
     Vec3f underNode;
     this->getUpperNode(&upperNode);
     this->getUnderNode(&underNode);
-    this->m_areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Ladder, 0, 0, 0, 0, Vec2f(0.0, 0.0), Vec2f(10.0, upperNode.m_y - underNode.m_y)};
+    this->m_areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Ladder, 0, 0, 0, 0, Vec2f(0.0, 0.0), Vec2f(10.0, upperNode.m_y - underNode.m_y));
     this->setAreaGimmick(&this->m_areaData, &this->m_areaDataSet, &this->m_ykData, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Ladder, -1);
     trigger->setObserveYakumono(this->m_yakumono);
@@ -29,8 +29,8 @@ void grKrazoaLadder::startupLadder(gfArchive* archive, u32 unk1, u32 unk2, grGim
 
     this->m_restrictUpExit = ladderData->m_restrictUpExit;
     this->m_51 = ladderData->m_51;
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
-    stTriggerData triggerData = {0,0,1,0};
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
+    stTriggerData triggerData(0,true,stTriggerData::Keep_None);
     this->createAttachMotionPath(&motionPathInfo, &triggerData, "MoveNode");
 }
 
@@ -49,7 +49,7 @@ void grKrazoaLadder::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId) 
 }
 
 void grKrazoaLadder::setMotionPathData(int mdlIndex) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 
 }
 

@@ -18,8 +18,8 @@ grPlatform* grPlatform::create(int mdlIndex, const char* tgtNodeName, const char
 void grPlatform::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     grMadein::startup(archive, unk1, unk2);
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
-    stTriggerData triggerData = {0,0,1,0};
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
+    stTriggerData triggerData(0,true,stTriggerData::Keep_None);
     this->createAttachMotionPath(&motionPathInfo, &triggerData, "MovePlatformNode");
 }
 
@@ -40,6 +40,6 @@ void grPlatform::update(float deltaFrame)
 
 
 void grPlatform::setMotionPathData(int mdlIndex) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 }
 

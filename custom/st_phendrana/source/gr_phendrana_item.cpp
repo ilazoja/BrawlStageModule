@@ -29,8 +29,8 @@ void grPhendranaItem::startup(gfArchive* archive, u32 unk1, u32 unk2)
     grMadein::startup(archive, unk1, unk2);
 
     if (this->motionPathData.m_mdlIndex > 0) {
-        grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, this->isRotateMotionPath, true, 0, 0, 0, 0, 0, 0 };
-        stTriggerData triggerData = {0,0,1,0};
+        grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, this->isRotateMotionPath, true);
+        stTriggerData triggerData(0,true,stTriggerData::Keep_None);
         this->createAttachMotionPath(&motionPathInfo, &triggerData, "MovePlatformNode");
     }
 }
@@ -42,7 +42,7 @@ void grPhendranaItem::update(float deltaFrame)
 
 void grPhendranaItem::setMotionPathData(int mdlIndex, bool isRotateMotionPath, u8 effectIndex, int soundEffectIndex)
 {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
     this->isRotateMotionPath = isRotateMotionPath;
     this->effectIndex = effectIndex;
     this->soundEffectIndex = soundEffectIndex;

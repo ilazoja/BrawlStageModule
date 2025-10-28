@@ -71,7 +71,7 @@ void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     Vec3f areaPosNE;
     this->getNodePosition(&areaPosSW, 0, "AreaSW");
     this->getNodePosition(&areaPosNE, 0, "AreaNE");
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, *(areaPosSW + areaPosNE).xy() / 2, *(areaPosSW - areaPosNE).xy()};
+    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, *(areaPosSW + areaPosNE).xy() / 2, *(areaPosSW - areaPosNE).xy());
 
     this->setupAttack();
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, true);

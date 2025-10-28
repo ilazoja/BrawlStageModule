@@ -20,8 +20,8 @@ grKrazoaSpawner* grKrazoaSpawner::create(int mdlIndex, const char* tgtNodeName, 
 void grKrazoaSpawner::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     grMadein::startup(archive, unk1, unk2);
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
-    stTriggerData triggerData = {0,0,1,0};
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
+    stTriggerData triggerData(0,true,stTriggerData::Keep_None);
     this->createAttachMotionPath(&motionPathInfo, &triggerData, "MovePlatformNode");
 
     this->createSoundWork(1,1);
@@ -71,7 +71,7 @@ void grKrazoaSpawner::update(float deltaFrame)
 }
 
 void grKrazoaSpawner::setConfig(int motionPathMdlIndex, float minRespawnFrames, float maxRespawnFrames, float spawnAfterFrames, bool isFirstSilentDeployment) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathMdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathMdlIndex, 0);
 
     this->minRespawnFrames = minRespawnFrames;
     this->maxRespawnFrames = maxRespawnFrames;

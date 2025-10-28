@@ -51,7 +51,7 @@ void grCapturePoint::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->m_soundEffects[4].m_offsetPos = Vec2f(0.0, 0.0);
 
 
-    this->areaData = (soAreaData){ 0, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, stageData->areaOffsetPos, stageData->areaRange};
+    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, stageData->areaOffsetPos, stageData->areaRange);
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);
     trigger->setObserveYakumono(this->m_yakumono);
@@ -241,7 +241,7 @@ void grCapturePoint::setNewCapturePosition() {
     this->stopGimmickSE(1);
     this->startGimmickSE(4);
 
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, resNodeData->m_translation.m_z, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, resNodeData->m_translation.m_z, 0);
 
     if (this->m_gimmickMotionPath != NULL) {
         gfTask* task = this->m_attachedTask;
@@ -273,8 +273,8 @@ void grCapturePoint::setNewCapturePosition() {
     }
     this->syncedGround = NULL;
     this->syncedGroundExitAnim = -1;
-    grGimmickMotionPathInfo motionPathInfo = {this->stage->m_fileData, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
-    stTriggerData triggerData = {0,0,1,0};
+    grGimmickMotionPathInfo motionPathInfo(this->stage->m_fileData, &this->motionPathData, false, true);
+    stTriggerData triggerData(0,true,stTriggerData::Keep_None);
     this->createAttachMotionPath(&motionPathInfo, &triggerData, "MoveNode");
     if (resNodeData->m_rotation.m_x > 0) {
         this->syncedGround = static_cast<grMadein*>(this->stage->getGround(resNodeData->m_rotation.m_x));

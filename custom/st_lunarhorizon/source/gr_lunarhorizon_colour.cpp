@@ -120,7 +120,7 @@ void grLunarHorizonColour::receiveCollMsg_Landing(grCollStatus* collStatus, grCo
 }
 
 void grLunarHorizonColour::setMotionPathData(int mdlIndex) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 
 }
 

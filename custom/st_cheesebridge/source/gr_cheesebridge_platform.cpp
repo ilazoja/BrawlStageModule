@@ -18,7 +18,7 @@ grCheeseBridgePlatform* grCheeseBridgePlatform::create(int mdlIndex, const char*
 void grCheeseBridgePlatform::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     grMadein::startup(archive, unk1, unk2);
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
     this->createAttachMotionPath(&motionPathInfo, NULL, "ObjRailMoveNode");
     this->motionPathData.m_motionRatio = 0.0;
     this->m_gimmickMotionPath->setFrameUpdate(0);
@@ -36,7 +36,7 @@ void grCheeseBridgePlatform::startup(gfArchive* archive, u32 unk1, u32 unk2) {
 }
 
 void grCheeseBridgePlatform::setMotionPathData(int mdlIndex) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 }
 
 void grCheeseBridgePlatform::setCooldownTimerWork(float* cooldownTimerWork) {

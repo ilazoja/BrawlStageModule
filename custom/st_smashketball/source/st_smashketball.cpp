@@ -67,7 +67,7 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
 
     stSmashketballData* smashketballData = (stSmashketballData*)this->m_stageData;
     
-    this->cannonData[index].motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, 0xFF, 0};
+    this->cannonData[index].motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, 0xFF, 0);
     this->cannonData[index].areaOffsetPos = Vec2f(0.0, 0.0);
     this->cannonData[index].areaRange = Vec2f(20.0, 15.0);
     this->cannonData[index].pos = smashketballData->cannonPosData[index].pos;
@@ -81,9 +81,9 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
     this->cannonData[index].alwaysRotate = false;
     this->cannonData[index].mdlIndex = mdlIndex;
     this->cannonData[index].breakHitstopFrame = 0x8;
-    this->cannonData[index].enterCannonTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
-    this->cannonData[index].motionPathTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
-    this->cannonData[index].isValidTriggerData = (stTriggerData){ 0, 0, 1, stTriggerData::Keep_None };
+    this->cannonData[index].enterCannonTriggerData.set(0, true, stTriggerData::Keep_None);
+    this->cannonData[index].motionPathTriggerData.set(0, true, stTriggerData::Keep_None);
+    this->cannonData[index].isValidTriggerData.set(0, true, stTriggerData::Keep_None);
     this->cannonData[index].attackData.m_damage = 0;
     this->cannonData[index].attackData.m_offsetPos.m_x = 0.0;
     this->cannonData[index].attackData.m_offsetPos.m_y = 0.0;

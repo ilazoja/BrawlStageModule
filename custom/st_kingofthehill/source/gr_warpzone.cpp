@@ -13,7 +13,7 @@ grWarpZone* grWarpZone::create(int mdlIndex, const char* taskName) {
 }
 
 void grWarpZone::prepareWarpData(int motionPathIndex, float deactivateFrames) {
-    this->motionPathData = (grGimmickMotionPathData){1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathIndex, 0};
+    this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, motionPathIndex, 0);
 
     this->deactivateFrames = deactivateFrames;
 };
@@ -21,7 +21,7 @@ void grWarpZone::prepareWarpData(int motionPathIndex, float deactivateFrames) {
 void grWarpZone::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     grGimmickWarpZone::startup(archive, unk1, unk2);
 
-    grGimmickMotionPathInfo motionPathInfo = { archive, &this->motionPathData, false, true, 0, 0, 0, 0, 0, 0 };
+    grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
     this->createAttachMotionPath(&motionPathInfo, NULL, "MoveNode");
 }
 
