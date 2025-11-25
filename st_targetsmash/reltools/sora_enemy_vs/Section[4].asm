@@ -1113,6 +1113,9 @@ loc_enemyOverrideSettings:
         .byte 0x00      # 0x3B
         .byte 0x00      # 0x3C
 
+        .byte 0x00      # pad
+        .byte 0x00      # pad
+
 #include "./Enemies/rodata/emBoobas.asm"
 #include "./Enemies/rodata/emSiralamos.asm"
 #include "./Enemies/rodata/emRoada.asm"
