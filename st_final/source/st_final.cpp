@@ -27,18 +27,18 @@ void stFinal::createObj()
     if (ground != NULL)
     {
         addGround(ground);
-        ground->setType(0);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
+        ground->setType(0);
         ground->setDontMoveGround();
     }
     ground = grFinal::create(2, "", "grFinalStage");
     if (ground != NULL)
     {
         addGround(ground);
-        ground->setType(1);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
+        ground->setType(1);
         ground->setDontMoveGround();
     }
     createCollision(m_fileData, 2, NULL);
