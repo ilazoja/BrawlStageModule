@@ -20,8 +20,8 @@ void grFinal::setType(int type)
     this->type = type;
 }
 
-void grFinal::startup(gfArchive* data, u32 unk1, u32 unk2) {
-    grYakumono::startup(data, unk1, unk2);
+void grFinal::startup(gfArchive* data, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grYakumono::startup(data, unk1, layerType);
     if (this->type == 1) {
         this->createEffectWork(1);
         this->m_effects[0].m_id = 0x330004;

@@ -9,7 +9,7 @@ class grPhendranaOther : public grPhendranaItem
         grPhendranaOther(const char* taskName) : grPhendranaItem(taskName) {};
         virtual ~grPhendranaOther() { };
 
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
 
         static grPhendranaOther* create(int mdlIndex, const char* taskName, stPhendrana* stage, bool isRidleyNode);
 };

@@ -12,9 +12,9 @@ grPhendranaFlickerbat* grPhendranaFlickerbat::create(int mdlIndex, const char* t
     return phendranaFlickerbat;
 }
 
-void grPhendranaFlickerbat::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaFlickerbat::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grPhendranaOther::startup(archive, unk1, unk2);
+    grPhendranaOther::startup(archive, unk1, layerType);
 
     if (this->soundEffectIndex == 0) {
         this->createSoundWork(2, 1);

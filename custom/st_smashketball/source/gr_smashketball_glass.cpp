@@ -14,10 +14,10 @@ grSmashketballGlass* grSmashketballGlass::create(int mdlIndex, const char* tgtNo
     return glass;
 }
 
-void grSmashketballGlass::startup(gfArchive* archive, u32 unk1, u32 unk2) {
+void grSmashketballGlass::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
     this->setupHitPoint();
 
-    grMadein::startup(archive, unk1, unk2);
+    grMadein::startup(archive, unk1, layerType);
 
     this->createSoundWork(2,1);
     this->m_soundEffects[0].m_id = snd_se_stage_Madein_02;

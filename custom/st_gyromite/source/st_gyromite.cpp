@@ -53,7 +53,7 @@ Ground* stGyromite::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         u32 laddersIndex = ground->getNodeIndex(0, "Ladders");
@@ -79,7 +79,7 @@ void stGyromite::createObjLadder(int mdlIndex, Vec2f* pos, int motionPathIndex, 
                 &areaPos, &areaRange
         );
         ladder->setMotionPathData(motionPathIndex);
-        ladder->startupLadder(this->m_fileData,0,0,&ladderData);
+        ladder->startupLadder(this->m_fileData, 0, gfSceneRoot::Layer_Ground, &ladderData);
         ladder->setPos(pos->m_x, pos->m_y, 0.0);
     }
 }

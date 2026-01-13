@@ -21,8 +21,8 @@ grGhostHouseBigBoo* grGhostHouseBigBoo::create(int mdlIndex, const char* tgtNode
 
 // TODO: Does not target the person who hit him last
 
-void grGhostHouseBigBoo::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grGhostHouseBigBoo::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     this->createSoundWork(1,1);
     this->m_soundEffects[0].m_id = snd_se_stage_Madein_01;
@@ -52,7 +52,7 @@ void grGhostHouseBigBoo::setupAttack() {
     float size = 1.0;
     Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
-    this->m_attackInfo->m_preset = 4;
+    this->m_attackInfo->m_preset = Attack_Overwrite;
 
     soCollisionAttackData* overwriteAttackData = this->getOverwriteAttackData();
     this->createAttackPointNormal(overwriteAttackData);

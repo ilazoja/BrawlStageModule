@@ -39,7 +39,7 @@ class grBowserCastleThwomp : public grMadein
             shadow = NULL;
             dangerZoneId = -1;
         }
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float frameDiff);
         virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
         virtual void onInflictEach(soCollisionLog* collisionLog, float power);

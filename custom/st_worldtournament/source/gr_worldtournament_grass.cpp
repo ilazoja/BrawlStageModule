@@ -15,8 +15,8 @@ grWorldTournamentGrass* grWorldTournamentGrass::create(int mdlIndex, const char*
     return ground;
 }
 
-void grWorldTournamentGrass::startup(gfArchive* data, u32 unk1, u32 unk2) {
-    grYakumono::startup(data, unk1, unk2);
+void grWorldTournamentGrass::startup(gfArchive* data, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grYakumono::startup(data, unk1, layerType);
     this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(0.0, -10.0), Vec2f(1000.0,5.0));
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);
@@ -48,7 +48,7 @@ void grWorldTournamentGrass::receiveCollMsg_Landing(grCollStatus* collStatus, gr
                 //fighter->toKnockOut();
                 this->toKnockOut(fighter);
             }
-            else if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == Fighter::Status_Down_Wait) {
+            else if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == Fighter::Status::Down_Wait) {
                 soMotionModule& motionModule = fighter->m_moduleAccesser->getMotionModule();
                 if (motionModule.getEndFrame() - motionModule.getFrame() <= 1) {
                     soPostureModule& postureModule = fighter->m_moduleAccesser->getPostureModule();
@@ -93,11 +93,11 @@ void grWorldTournamentGrass::toKnockOut(Fighter* fighter) {
     }
     fighter->setCurry(false, -1);
     moduleAccesser->getCollisionHitModule().setCheckCatch(0,0);
-    moduleAccesser->getWorkManageModule().onFlag(0x12000018);
+    moduleAccesser->getWorkManageModule().onFlag(Fighter::Instance::Work::Flag_KnockOut);
     moduleAccesser->getControllerModule().setOff(true);
-    Fighter::StatusKind statusKind = Fighter::Status_Damage_Fall;
+    Fighter::Status::Kind statusKind = Fighter::Status::Damage_Fall;
     if (moduleAccesser->getSituationModule().getKind() == Situation_Ground) {
-        statusKind = Fighter::Status_Down_Spot;
+        statusKind = Fighter::Status::Down_Spot;
     }
     moduleAccesser->getStatusModule().changeStatusRequest(statusKind, moduleAccesser);
 }

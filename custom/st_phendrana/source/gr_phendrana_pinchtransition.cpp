@@ -14,9 +14,9 @@ grPhendranaPinchTransition* grPhendranaPinchTransition::create(int mdlIndex, con
     return phendranaPinch;
 }
 
-void grPhendranaPinchTransition::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaPinchTransition::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grPhendranaItem::startup(archive, unk1, unk2);
+    grPhendranaItem::startup(archive, unk1, layerType);
 
     this->changeState(State_Start);
 }

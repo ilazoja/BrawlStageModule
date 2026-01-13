@@ -70,7 +70,7 @@ void stLunarHorizon::createObjBaseGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
 
@@ -101,7 +101,7 @@ void stLunarHorizon::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -114,7 +114,7 @@ void stLunarHorizon::createObjColour(int mdlIndex, Vec2f* pos, float rot, float 
         addGround(colour);
         colour->setType(type);
         colour->setCooldownWork(&this->cooldownTimer);
-        colour->startup(m_fileData, 0, 0);
+        colour->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         colour->setStageData(m_stageData);
         colour->setPos(pos->m_x, pos->m_y, 0.0);
         colour->setRot(0, 0, rot);
@@ -130,7 +130,7 @@ void stLunarHorizon::createObjYellow(int mdlIndex, Vec2f* pos, float rot, float 
         addGround(yellow);
         yellow->setCooldownWork(&this->cooldownTimer);
         yellow->setIsResetWork(&this->isReset);
-        yellow->startup(m_fileData, 0, 0);
+        yellow->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         yellow->setStageData(m_stageData);
         yellow->setPos(pos->m_x, pos->m_y, 0.0);
         yellow->setRot(0, 0, rot);
@@ -144,7 +144,7 @@ void stLunarHorizon::createObjSun(int mdlIndex) {
     if (sun != NULL)
     {
         addGround(sun);
-        sun->startup(m_fileData, 0, 0);
+        sun->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         sun->setStageData(m_stageData);
     }
 }

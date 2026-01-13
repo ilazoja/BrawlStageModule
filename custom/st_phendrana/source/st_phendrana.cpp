@@ -79,7 +79,7 @@ void stPhendrana::createObjAshiba(int mdlIndex)
     {
         addGround(ground);
         ground->setStageData(m_stageData);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setDontMoveGround();
 
         nw4r::g3d::ResNodeData* resNodeData = NULL;
@@ -147,7 +147,7 @@ void setupObj(grPhendranaItem* phendranaItem, void* stageData, gfArchive* fileDa
 {
     phendranaItem->setStageData(stageData);
     phendranaItem->setMotionPathData(motionPathIndex, rot >= 360, effectIndex, soundEffectIndex);
-    phendranaItem->startup(fileData,0,0);
+    phendranaItem->startup(fileData,0,gfSceneRoot::Layer_Ground);
     phendranaItem->setPos(pos->m_x, pos->m_y, 0.0);
     phendranaItem->setScale(scale, scale, scale);
     phendranaItem->setRot(0.0, 0.0, rot);

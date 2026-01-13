@@ -12,7 +12,7 @@ class grSmashketballGlass : public grMadein {
         {
             timer = 0;
         };
-        virtual void startup(gfArchive* data, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
         virtual ~grSmashketballGlass(){};
         virtual void onDamage(int index, soDamage* damage, soDamageAttackerInfo* attackerInfo);

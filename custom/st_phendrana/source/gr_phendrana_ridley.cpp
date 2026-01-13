@@ -20,9 +20,9 @@ void grPhendranaRidley::setup(int mdlIndex, const char* taskName, stPhendrana* s
     grPhendranaPinch::setup(mdlIndex, taskName, stage, isRidleyNode);
 }
 
-void grPhendranaRidley::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaRidley::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grPhendranaPinch::startup(archive, unk1, unk2);
+    grPhendranaPinch::startup(archive, unk1, layerType);
 
     this->changeState(State_Fly);
 }

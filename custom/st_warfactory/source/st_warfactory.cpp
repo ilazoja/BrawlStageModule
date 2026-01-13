@@ -55,7 +55,7 @@ void stWarFactory::createObjWall(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -68,7 +68,7 @@ void stWarFactory::createObjConveyor(int mdlIndex, int collIndex, int conveyorIn
         addGround(conveyor);
         ConveyorGimmickData* conveyorGimmickDatas = (ConveyorGimmickData*)this->m_stageData;
         conveyor->setGimmickData(&conveyorGimmickDatas[conveyorIndex]);
-        conveyor->startup(m_fileData, 0, 0);
+        conveyor->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         conveyor->setStageData(m_stageData);
         conveyor->setDontMoveGround();
         createCollision(m_fileData, collIndex, conveyor);

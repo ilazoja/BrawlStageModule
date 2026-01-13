@@ -13,8 +13,8 @@ grWorldTournamentConcrete* grWorldTournamentConcrete::create(int mdlIndex, const
     return ground;
 }
 
-void grWorldTournamentConcrete::startup(gfArchive* data, u32 unk1, u32 unk2) {
-    grYakumono::startup(data, unk1, unk2);
+void grWorldTournamentConcrete::startup(gfArchive* data, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grYakumono::startup(data, unk1, layerType);
     this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(0.0, -115.0), Vec2f(1000.0,100.0));
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);

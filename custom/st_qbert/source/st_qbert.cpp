@@ -95,7 +95,7 @@ void stQbert::createObjBg(int mdlIndex) {
     grQbertBackground* ground = grQbertBackground::create(mdlIndex, "", "grQbertMainBg");
     if(ground != NULL){
         addGround(ground);
-        ground->startup(m_fileData,0,0);
+        ground->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -105,7 +105,7 @@ void stQbert::createObjHud(int mdlIndex) {
     grQbertHud* hud = grQbertHud::create(mdlIndex, "", "grQbertHud");
     if(hud != NULL){
         addGround(hud);
-        hud->startup(m_fileData,0,0);
+        hud->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         hud->setStageData(m_stageData);
         hud->initializeEntity();
         hud->startEntityAutoLoop();
@@ -117,7 +117,7 @@ void stQbert::createObjCube(int mdlIndex, int collIndex) {
     grQbertCube* cube = grQbertCube::create(mdlIndex, "", "grQbertCube");
     if(cube != NULL){
         addGround(cube);
-        cube->startup(m_fileData,0,0);
+        cube->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         cube->setStageData(m_stageData);
         cube->setDontMoveGround();
         cube->initializeEntity();
@@ -133,7 +133,7 @@ void stQbert::createObjDisk(int mdlIndex, int collIndex, int diskIndex) {
     grQbertDisk* disk = grQbertDisk::create(mdlIndex, "", "grQbertDisk");
     if(disk != NULL){
         addGround(disk);
-        disk->startup(m_fileData,0,0);
+        disk->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         disk->setStageData(m_stageData);
         disk->initializeEntity();
         disk->startEntity();
@@ -148,7 +148,7 @@ grQbertAlien* stQbert::createObjAlien(int mdlIndex) {
     grQbertAlien* alien = grQbertAlien::create(mdlIndex, "", "grQbertAlien", this);
     if(alien != NULL){
         addGround(alien);
-        alien->startup(m_fileData,0,0);
+        alien->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         alien->setStageData(m_stageData);
         alien->initializeEntity();
         alien->startEntity();
@@ -162,7 +162,7 @@ void stQbert::createObjCoily(int mdlIndex, grQbertAlien* enemyTarget) {
     grQbertCoily* coily = grQbertCoily::create(mdlIndex, "", "grQbertCoily", this, enemyTarget);
     if(coily != NULL){
         addGround(coily);
-        coily->startup(m_fileData,0,0);
+        coily->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         coily->setStageData(m_stageData);
         coily->initializeEntity();
         coily->startEntity();
@@ -175,7 +175,7 @@ void stQbert::createObjGreen(int mdlIndex) {
     grQbertGreen* green = grQbertGreen::create(mdlIndex, "", "grQbertGreen", this);
     if(green != NULL){
         addGround(green);
-        green->startup(m_fileData,0,0);
+        green->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         green->setStageData(m_stageData);
         green->initializeEntity();
         green->startEntity();
@@ -189,7 +189,7 @@ void stQbert::createObjRed(int mdlIndex) {
     grQbertRed* red = grQbertRed::create(mdlIndex, "", "grQbertRed", this);
     if(red != NULL){
         addGround(red);
-        red->startup(m_fileData,0,0);
+        red->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         red->setStageData(m_stageData);
         red->initializeEntity();
         red->startEntity();
@@ -202,7 +202,7 @@ void stQbert::createObjScore(int mdlIndex, int player, int type) {
     grQbertScore* score = grQbertScore::create(mdlIndex, "StgDonkey_Suuji", "grQbertScore");
     if(score != NULL){
         addGround(score);
-        score->startup(m_fileData,0,0);
+        score->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         score->setStageData(m_stageData);
         score->setType(type);
         score->setPosWork(&this->scorePositions[player*NUM_SCORE_DIGITS + type]);
@@ -214,7 +214,7 @@ void stQbert::createObjRound(int mdlIndex, int type) {
     grQbertScore* score = grQbertScore::create(mdlIndex, "StgDonkey_Suuji", "grQbertRound");
     if(score != NULL){
         addGround(score);
-        score->startup(m_fileData,0,0);
+        score->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         score->setStageData(m_stageData);
         score->setType(type);
         score->setPosWork(&this->scorePositions[4*NUM_SCORE_DIGITS + type]);

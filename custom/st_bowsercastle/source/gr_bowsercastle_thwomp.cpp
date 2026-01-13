@@ -19,8 +19,8 @@ grBowserCastleThwomp* grBowserCastleThwomp::create(int mdlIndex, const char* tgt
     return thwomp;
 }
 
-void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grBowserCastleThwomp::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     stBowserCastleData* stageData = static_cast<stBowserCastleData*>(this->getStageData());
 
@@ -99,7 +99,7 @@ void grBowserCastleThwomp::setupAttack() {
     float size = 1.0;
     Vec3f offsetPos = Vec3f(0.0, 100.0, 0.0);
     this->setAttack(size, &offsetPos);
-    this->m_attackInfo->m_preset = 4;
+    this->m_attackInfo->m_preset = Attack_Overwrite;
 
     soCollisionAttackData* overwriteAttackData = this->getOverwriteAttackData();
     this->createAttackPointNormal(overwriteAttackData);

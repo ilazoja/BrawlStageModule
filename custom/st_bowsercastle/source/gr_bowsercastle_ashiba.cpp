@@ -12,8 +12,8 @@ grBowserCastleAshiba* grBowserCastleAshiba::create(int mdlIndex, const char* tgt
     return bg;
 }
 
-void grBowserCastleAshiba::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grYakumono::startup(archive, unk1, unk2);
+void grBowserCastleAshiba::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grYakumono::startup(archive, unk1, layerType);
 
     this->createSoundWork(1,1);
     this->m_soundEffects[0].m_id = snd_se_stage_BowserCastle_Ambience;

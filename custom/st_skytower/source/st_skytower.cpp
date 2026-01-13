@@ -29,7 +29,7 @@ void stSkyTower::createObj()
     {
         addGround(ground);
         ground->setType(0);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         ground->setMotionRatio(static_cast<float*>(this->m_stageData)[0]);
@@ -39,7 +39,7 @@ void stSkyTower::createObj()
     {
         addGround(ground);
         ground->setType(1);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         ground->setMotionRatio(static_cast<float*>(this->m_stageData)[1]);

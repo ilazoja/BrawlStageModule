@@ -24,8 +24,8 @@ void grFire::setMotionPathData(int mdlIndex) {
     this->motionPathData.set(1.0, 0, grGimmickMotionPathData::Path_Loop, mdlIndex, 0);
 }
 
-void grFire::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grFire::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, false, true);
     this->createAttachMotionPath(&motionPathInfo, NULL, "MoveNode");
@@ -40,7 +40,7 @@ void grFire::startup(gfArchive* archive, u32 unk1, u32 unk2) {
     this->getNodePosition(&endPos, 0, "HitboxEnd");
     Vec3f offsetPos = endPos - startPos;
     this->setAttack(this->size, &offsetPos);
-    this->m_attackInfo->m_preset = 4;
+    this->m_attackInfo->m_preset = Attack_Overwrite;
 
     soCollisionAttackData* overwriteAttackData = this->getOverwriteAttackData();
     this->createAttackPointNormal(overwriteAttackData);

@@ -68,7 +68,7 @@ void stKrazoa::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
 
@@ -103,7 +103,7 @@ void stKrazoa::createObjLadder(int mdlIndex, Vec2f* pos, int motionPathIndex, bo
                 &areaPos, &areaRange
         );
         ladder->setMotionPathData(motionPathIndex);
-        ladder->startupLadder(this->m_fileData,0,0,&ladderData);
+        ladder->startupLadder(this->m_fileData, 0, gfSceneRoot::Layer_Ground, &ladderData);
         ladder->setPos(pos->m_x, pos->m_y, 0.0);
     }
 }
@@ -114,7 +114,7 @@ void stKrazoa::createObjSpawner(int mdlIndex, Vec2f* pos, float rot, int motionP
         addGround(platform);
         platform->setStageData(m_stageData);
         platform->setConfig(motionPathIndex, minRespawnFrames, maxRespawnFrames, spawnAfterFrames, isFirstSilentDeployment);
-        platform->startup(this->m_fileData,0,0);
+        platform->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         platform->setPos(pos->m_x, pos->m_y, 0.0);
         platform->setRot(0.0, 0.0, rot);
         if (collIndex >= 0) {

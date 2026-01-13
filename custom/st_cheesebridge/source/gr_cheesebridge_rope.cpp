@@ -14,8 +14,8 @@ grCheeseBridgeRope* grCheeseBridgeRope::create(int mdlIndex, const char* tgtNode
     return rope;
 }
 
-void grCheeseBridgeRope::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grCheeseBridgePlatform::startup(archive, unk1, unk2);
+void grCheeseBridgeRope::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grCheeseBridgePlatform::startup(archive, unk1, layerType);
     this->m_soundEffects[0].m_id = snd_se_stage_Jungle_01;
 
     stCheeseBridgeData* stageData = static_cast<stCheeseBridgeData*>(this->getStageData());

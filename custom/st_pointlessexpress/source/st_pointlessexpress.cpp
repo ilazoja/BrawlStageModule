@@ -53,7 +53,7 @@ void stPointlessExpress::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -64,7 +64,7 @@ void stPointlessExpress::createObjSky(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
 
@@ -86,7 +86,7 @@ void stPointlessExpress::createObjFire(int mdlIndex, Vec2f* pos, float rot, floa
         lava->setMotionPathData(motionPathIndex);
         lava->setSizeAndVector(size, vector, isCapsule);
         lava->setStageData(m_stageData);
-        lava->startup(m_fileData, 0, 0);
+        lava->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         lava->initializeEntity();
         lava->startEntity();
         lava->setPos(pos->m_x, pos->m_y, 0.0);

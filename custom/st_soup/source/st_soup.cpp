@@ -51,7 +51,7 @@ void stSoup::createObjBg(int mdlIndex) {
     grSoupBackground* ground = grSoupBackground::create(mdlIndex, "", "grSoupMainBg");
     if(ground != NULL){
         addGround(ground);
-        ground->startup(m_fileData,0,0);
+        ground->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -61,7 +61,7 @@ void stSoup::createObjBridge(int mdlIndex, int collIndex) {
     grSoupBridge* bridge = grSoupBridge::create(mdlIndex, "", "grSoupBridge");
     if(bridge != NULL){
         addGround(bridge);
-        bridge->startup(m_fileData,0,0);
+        bridge->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         bridge->setStageData(m_stageData);
         bridge->initializeEntity();
         bridge->startEntityAutoLoop();
@@ -74,7 +74,7 @@ void stSoup::createObjRocket(int mdlIndex, int collIndex) {
     grSoupRocket* rocket = grSoupRocket::create(mdlIndex, "", "grSoupRocket");
     if(rocket != NULL){
         addGround(rocket);
-        rocket->startup(m_fileData,0,0);
+        rocket->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         rocket->setStageData(m_stageData);
         rocket->initializeEntity();
         rocket->startEntity();

@@ -11,7 +11,7 @@ public:
 
     }
     virtual ~grSpring() { }
-    virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+    virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
     virtual void update(float deltaFrame);
     virtual void presentShootEvent();
     virtual void setMotionPathData(int mdlIndex);

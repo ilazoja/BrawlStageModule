@@ -62,7 +62,7 @@ void stWorldTournament::createObjConcrete(int mdlIndex) {
     if (concrete != NULL)
     {
         addGround(concrete);
-        concrete->startup(m_fileData, 0, 0);
+        concrete->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         concrete->setStageData(m_stageData);
     }
 }
@@ -72,7 +72,7 @@ void stWorldTournament::createObjGrass(int mdlIndex, int collIndex) {
     if (grass != NULL)
     {
         addGround(grass);
-        grass->startup(m_fileData, 0, 0);
+        grass->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         grass->setStageData(m_stageData);
         createCollision(m_fileData, collIndex, grass);
     }

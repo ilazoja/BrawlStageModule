@@ -13,8 +13,8 @@ grLunarHorizonColour* grLunarHorizonColour::create(int mdlIndex, const char* tgt
     return ground;
 }
 
-void grLunarHorizonColour::startup(gfArchive* data, u32 unk1, u32 unk2) {
-    grMadein::startup(data, unk1, unk2);
+void grLunarHorizonColour::startup(gfArchive* data, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(data, unk1, layerType);
     this->createSoundWork(1,1);
     if (this->type > 0) {
         this->m_soundEffects[0].m_id = snd_se_stage_Pictchat_clock;

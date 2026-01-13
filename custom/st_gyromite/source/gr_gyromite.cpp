@@ -31,8 +31,8 @@ void grGyromite::receiveCollMsg_Heading(grCollStatus* collStatus, grCollisionJoi
         int entryId = g_ftManager->getEntryIdFromTaskId(collStatus->m_taskId, NULL);
         if (entryId > -1) {
             Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-            if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == Fighter::Status_Cliff_Wait) {
-                fighter->m_moduleAccesser->getStatusModule().changeStatusRequest(Fighter::Status_Fall, fighter->m_moduleAccesser);
+            if (fighter->m_moduleAccesser->getStatusModule().getStatusKind() == Fighter::Status::Cliff_Wait) {
+                fighter->m_moduleAccesser->getStatusModule().changeStatusRequest(Fighter::Status::Fall, fighter->m_moduleAccesser);
             }
         }
     }

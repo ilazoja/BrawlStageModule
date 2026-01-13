@@ -16,7 +16,7 @@ class grPhendranaPinch : public grPhendranaItem
         };
         virtual ~grPhendranaPinch() { };
         
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
 
         virtual void setMotionPathData(int mdlIndex, bool isRotateMotionPath, u8 effectIndex = 0, int soundEffectIndex = 0);

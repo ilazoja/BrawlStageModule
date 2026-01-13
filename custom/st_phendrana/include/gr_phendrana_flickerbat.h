@@ -28,7 +28,7 @@ class grPhendranaFlickerbat : public grPhendranaOther
         };
         virtual ~grPhendranaFlickerbat() { };
 
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
 
         static grPhendranaFlickerbat* create(int mdlIndex, const char* taskName, stPhendrana* stage, bool isRidleyNode);

@@ -54,7 +54,7 @@ void stTempleOfTime::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -65,7 +65,7 @@ void stTempleOfTime::createObjDoor(int mdlIndex) {
     if (door != NULL)
     {
         addGround(door);
-        door->startup(m_fileData, 0, 0);
+        door->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         door->setStageData(m_stageData);
         door->initializeEntity();
         door->startEntity();
@@ -77,7 +77,7 @@ void stTempleOfTime::createObjMedallion(int mdlIndex) {
     if (medallion != NULL)
     {
         addGround(medallion);
-        medallion->startup(m_fileData, 0, 0);
+        medallion->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         medallion->setStageData(m_stageData);
         medallion->setStageParam(this->m_stageParam);
         medallion->initializeEntity();

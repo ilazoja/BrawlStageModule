@@ -16,8 +16,8 @@ grTempleOfTimeDoor* grTempleOfTimeDoor::create(int mdlIndex, const char* tgtNode
     return ground;
 }
 
-void grTempleOfTimeDoor::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grTempleOfTimeDoor::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
     this->createSoundWork(6,1);
     this->m_soundEffects[0].m_id = snd_se_stage_Madein_01;
     this->m_soundEffects[0].m_repeatFrame = 0;

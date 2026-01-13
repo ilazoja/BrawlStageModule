@@ -14,9 +14,9 @@ grPhendranaPinch* grPhendranaPinch::create(int mdlIndex, const char* taskName, s
     return phendranaPinch;
 }
 
-void grPhendranaPinch::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaPinch::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grPhendranaItem::startup(archive, unk1, unk2);
+    grPhendranaItem::startup(archive, unk1, layerType);
 
     this->setMotion(0);
     this->setMotionRatio(0);

@@ -54,7 +54,7 @@ void stFinkrat::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -65,7 +65,7 @@ void stFinkrat::createObjLava(int mdlIndex) {
     if (lava != NULL)
     {
         addGround(lava);
-        lava->startup(m_fileData, 0, 0);
+        lava->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         lava->setStageData(m_stageData);
         lava->setupAttack();
         lava->initializeEntity();
@@ -80,7 +80,7 @@ void stFinkrat::createObjElevate(int mdlIndex, int collIndex) {
     {
         addGround(elevate);
         elevate->setStageData(m_stageData);
-        elevate->startup(m_fileData, 0, 0);
+        elevate->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         elevate->initializeEntity();
         elevate->startEntity();
         createCollision(m_fileData, collIndex, elevate);

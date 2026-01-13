@@ -304,7 +304,7 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
                 Fighter *fighter = g_ftManager->getFighter(entryId, -1);
                 if (fighter != NULL) {
                     if (!this->isItemObtained &&
-                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Warpstar_Jump) {
+                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status::Warpstar_Jump) {
                         if (g_GameGlobal->m_modeMelee->m_meleeInitData.m_itSwitch.m_item.ex.m_stage) {
                             Vec3f fighterPos = soExternalValueAccesser::getPos(fighter);
                             Vec3f triggerPos;
@@ -333,11 +333,11 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
                         }
                         this->isItemObtained = true;
                     } else if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
-                               soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
+                               soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status::Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
                         fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
-                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
+                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance::Work::Int_Value_1) > 0) {
                             ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealLw) {
                                 this->spoutTimer =
@@ -354,11 +354,11 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
                 Fighter *fighter = g_ftManager->getFighter(entryId, -1);
                 if (fighter != NULL) {
                     if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
-                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
+                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status::Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
                         fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
-                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
+                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance::Work::Int_Value_1) > 0) {
                             ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealHi) {
                                 this->spoutTimer = izumiData->riseWarningFrames;
@@ -384,11 +384,11 @@ void grIzumiSpout::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJ
                 Fighter *fighter = g_ftManager->getFighter(entryId, -1);
                 if (fighter != NULL) {
                     if (fighter->m_moduleAccesser->getItemManageModule().getHaveItemKind(0) == Item_StarRod &&
-                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status_Item_Swing_S4_Hold) {
+                        soExternalValueAccesser::getStatusKind(fighter) == Fighter::Status::Item_Swing_S4_Hold) {
                         soItemInfo itemInfo;
                         fighter->m_moduleAccesser->getItemManageModule().getHaveItemInfo(&itemInfo, 0);
                         if (itemInfo.m_item != NULL &&
-                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance_Work_Int_Value_1) > 0) {
+                            soExternalValueAccesser::getWorkInt(itemInfo.m_item, BaseItem::Instance::Work::Int_Value_1) > 0) {
                             ipPadButton button = fighter->m_moduleAccesser->getControllerModule().getButton();
                             if (button.m_appealHi) {
                                 this->destFrame += izumiData->spoutAscentSpeed;
@@ -418,7 +418,7 @@ void grIzumiSpout::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJ
         if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlagItem)) {
             BaseItem *item = static_cast<BaseItem *>(gfTask::getTask(collStatus->m_taskId));
             if (item != NULL && item->m_kind == Item_WarpStar &&
-                soExternalValueAccesser::getStatusKind(item) == BaseItem::Status_Have) {
+                soExternalValueAccesser::getStatusKind(item) == BaseItem::Status::Have) {
                 float currentFrame = this->m_modelAnims[0]->m_anmObjChrRes->GetFrame();
                 float deltaFrame = (izumiData->spoutMaxMove + izumiData->spoutMinMove) / 2;
                 if (currentFrame - deltaFrame < izumiData->spoutMinFrame) {

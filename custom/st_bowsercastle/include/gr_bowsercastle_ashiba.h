@@ -9,7 +9,7 @@ class grBowserCastleAshiba : public grYakumono
     public:
         grBowserCastleAshiba(const char* taskName) : grYakumono(taskName) {
         };
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         //virtual void update(float frameDiff);
         virtual ~grBowserCastleAshiba() { };
 

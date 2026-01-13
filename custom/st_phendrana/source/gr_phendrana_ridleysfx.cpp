@@ -13,9 +13,9 @@ grPhendranaRidleySfx* grPhendranaRidleySfx::create(int mdlIndex, const char* tas
     return phendranaRidleySfx;
 }
 
-void grPhendranaRidleySfx::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaRidleySfx::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grPhendranaPinch::startup(archive, unk1, unk2);
+    grPhendranaPinch::startup(archive, unk1, layerType);
 
     this->createSoundWork(2, 2);
     

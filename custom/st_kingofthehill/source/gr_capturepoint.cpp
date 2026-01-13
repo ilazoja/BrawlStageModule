@@ -18,8 +18,8 @@ grCapturePoint* grCapturePoint::create(int mdlIndex, const char* tgtNodeName, co
     return ground;
 }
 
-void grCapturePoint::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grCapturePoint::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     stKingOfTheHillData* stageData = (stKingOfTheHillData*)this->getStageData();
 
@@ -160,7 +160,7 @@ void grCapturePoint::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
         stKingOfTheHillData* stageData = static_cast<stKingOfTheHillData*>(this->getStageData());
 
         Fighter* fighter = g_ftManager->getFighter(entryId, -1);
-        if (!stageData->disableCapturesDuringShielding || fighter->m_moduleAccesser->getStatusModule().getStatusKind() != Fighter::Status_Guard) {
+        if (!stageData->disableCapturesDuringShielding || fighter->m_moduleAccesser->getStatusModule().getStatusKind() != Fighter::Status::Guard) {
             this->applyMotionRate(stageData->bonusMotionSpeedMultipliers[this->bonusMultiplier - 1]);
             if (this->consecutiveFramesCaptured >= stageData->consecutiveFramesBeforeStartReward && int(this->consecutiveFramesCaptured) % stageData->rewardRate == 0) {
                 int lastChanceMultiplier = 1;

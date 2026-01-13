@@ -12,7 +12,7 @@ public:
 
     }
     virtual ~grKrazoaLadder() { }
-    virtual void startupLadder(gfArchive* archive, u32 unk1, u32 unk2, grGimmickLadderData* ladderData);
+    virtual void startupLadder(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType, grGimmickLadderData* ladderData);
     virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);
     virtual void setMotionPathData(int mdlIndex);
 

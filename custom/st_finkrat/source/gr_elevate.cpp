@@ -15,9 +15,9 @@ grElevate* grElevate::create(int mdlIndex, const char* tgtNodeName, const char* 
     return elevate;
 }
 
-void grElevate::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grElevate::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grMadein::startup(archive, unk1, unk2);
+    grMadein::startup(archive, unk1, layerType);
     grFinkratData* finkratData = static_cast<grFinkratData*>(this->getStageData());
     this->elevateTimer = finkratData->platformElevateFrames;
 

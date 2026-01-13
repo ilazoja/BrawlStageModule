@@ -15,8 +15,8 @@ grBowserCastlePodoboo* grBowserCastlePodoboo::create(int mdlIndex, const char* t
     return podoboo;
 }
 
-void grBowserCastlePodoboo::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grBowserCastlePodoboo::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     this->createSoundWork(kNumPodobooSfxVariation*2,1);
     for (int i = 0; i < kNumPodobooSfxVariation; i++) {

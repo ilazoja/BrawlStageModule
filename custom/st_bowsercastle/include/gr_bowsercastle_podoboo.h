@@ -22,7 +22,7 @@ class grBowserCastlePodoboo : public grMadein
         grBowserCastlePodoboo(const char* taskName) : grMadein(taskName) {
             state = State_Inactive;
         }
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
         virtual ~grBowserCastlePodoboo() { };
         virtual void changeState(State state);

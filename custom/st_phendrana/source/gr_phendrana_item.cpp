@@ -24,9 +24,9 @@ void grPhendranaItem::setup(int mdlIndex, const char* taskName, stPhendrana* sta
     this->setCalcuCallbackRoot(7);
 }
 
-void grPhendranaItem::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grPhendranaItem::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grMadein::startup(archive, unk1, unk2);
+    grMadein::startup(archive, unk1, layerType);
 
     if (this->motionPathData.m_mdlIndex > 0) {
         grGimmickMotionPathInfo motionPathInfo(archive, &this->motionPathData, this->isRotateMotionPath, true);

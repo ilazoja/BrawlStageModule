@@ -25,7 +25,7 @@ class grPhendranaRidley : public grPhendranaPinch
         };
         virtual ~grPhendranaRidley() { };
 
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
 
         static grPhendranaRidley* create(int mdlIndex, const char* taskName, stPhendrana* stage, bool isRidleyNode, grPhendranaRidleySfx* phendranaRidleySfx);

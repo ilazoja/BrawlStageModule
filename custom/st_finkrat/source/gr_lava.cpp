@@ -25,7 +25,7 @@ void grLava::setupAttack() {
     float size = 1.0;
     Vec3f offsetPos = Vec3f(finkratData->lavaWidth, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
-    this->m_attackInfo->m_preset = 4;
+    this->m_attackInfo->m_preset = Attack_Overwrite;
 
     soCollisionAttackData* overwriteAttackData = this->getOverwriteAttackData();
     this->createAttackPointNormal(overwriteAttackData);

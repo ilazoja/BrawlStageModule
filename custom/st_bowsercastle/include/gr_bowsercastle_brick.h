@@ -26,7 +26,7 @@ public:
             leftHangIndex = -1;
         };
         virtual void update(float frameDiff);
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void onDamage(int index, soDamage* damage, soDamageAttackerInfo* attackerInfo);
         virtual ~grBowserCastleBrick() { };
         virtual void setupHitPoint();

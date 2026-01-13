@@ -19,7 +19,7 @@ public:
         state = State_Up;
     };
     virtual void update(float deltaFrame);
-    virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+    virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
     virtual ~grElevate(){};
 
     static grElevate* create(int mdlIndex, const char* tgtNodeName, const char* taskName);

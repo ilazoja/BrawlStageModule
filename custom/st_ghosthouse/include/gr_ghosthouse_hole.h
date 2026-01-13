@@ -23,7 +23,7 @@ public:
         state = State_Invalid;
     };
     virtual void update(float deltaFrame);
-    virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+    virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
     virtual ~grGhostHouseHole(){};
     virtual void updateColl(float deltaFrame);
     virtual void setMotionPathData(int mdlIndex);

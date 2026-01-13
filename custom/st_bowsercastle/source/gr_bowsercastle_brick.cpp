@@ -15,8 +15,8 @@ grBowserCastleBrick* grBowserCastleBrick::create(int mdlIndex, const char* tgtNo
     return brick;
 }
 
-void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grBowserCastleBrick::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     this->createEffectWork(2);
     SimpleEffectData simpleEffectData;

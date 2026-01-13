@@ -45,9 +45,9 @@ void grAdventureBarrelCannon::attachGround(grYakumono* ground) {
     this->attachedGround = ground;
 }
 
-void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grYakumono::startup(archive, unk1, unk2);
+    grYakumono::startup(archive, unk1, layerType);
     stCannonData* stageData = static_cast<stCannonData*>(this->getStageData());
     this->changeMatColAnim(0, 0);
     this->cannonData = (grGimmickBarrelCannonData*)this->m_gimmickData;
@@ -65,7 +65,7 @@ void grAdventureBarrelCannon::startup(gfArchive* archive, u32 unk1, u32 unk2)
                 this->kind = BarrelCannon_PathAuto;
             }
             this->createMotionPath();
-            this->shootMotionPath->startup(archive, 0, 0);
+            this->shootMotionPath->startup(archive, 0, gfSceneRoot::Layer_Ground);
             break;
         default:
             break;

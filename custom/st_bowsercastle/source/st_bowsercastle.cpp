@@ -53,7 +53,7 @@ void stBowserCastle::createObjAshiba(int mdlIndex) {
     grBowserCastleAshiba* ground = grBowserCastleAshiba::create(mdlIndex, "", "grBowserCastleStage");
     if(ground != NULL){
         this->addGround(ground);
-        ground->startup(m_fileData,0,0);
+        ground->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         this->createCollision(this->m_fileData, 2, ground);
@@ -84,7 +84,7 @@ void stBowserCastle::createObjBackground(int mdlIndex) {
     grBowserCastleBackground* ground = grBowserCastleBackground::create(mdlIndex, "", "grBowserCastleBackground");
     if(ground != NULL) {
         this->addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -95,7 +95,7 @@ void stBowserCastle::createObjThwomp(int mdlIndex, int collIndex, Vec2f* pos, in
     if(thwomp != NULL){
         this->addGround(thwomp);
         thwomp->setStageData(m_stageData);
-        thwomp->startup(m_fileData,0,0);
+        thwomp->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         if (collIndex > 0) {
             createCollision(m_fileData, collIndex, thwomp);
         }
@@ -105,7 +105,7 @@ void stBowserCastle::createObjThwomp(int mdlIndex, int collIndex, Vec2f* pos, in
         if (shadow != NULL) {
             this->addGround(shadow);
             shadow->setStageData(m_stageData);
-            shadow->startup(m_fileData,0,0);
+            shadow->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
             shadow->setPos(shadowPos->m_x, shadowPos->m_y, 0);
             shadow->changeState(grBowserCastleShadow::State_Break);
             thwomp->setShadow(shadow);
@@ -119,7 +119,7 @@ void stBowserCastle::createObjBrick(int mdlIndex, int collIndex, Vec2f* pos, int
     if(ground != NULL){
         this->addGround(ground);
         ground->setStageData(m_stageData);
-        ground->startup(m_fileData,0,0);
+        ground->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         if (collIndex > 0) {
             createCollision(m_fileData, collIndex, ground);
             grCollision* collision = this->getGround(0)->m_collision;
@@ -137,7 +137,7 @@ void stBowserCastle::createObjPodoboo(int mdlIndex, Vec3f* pos) {
     if(podoboo != NULL){
         this->addGround(podoboo);
         podoboo->setStageData(m_stageData);
-        podoboo->startup(m_fileData,0,0);
+        podoboo->startup(m_fileData,0,gfSceneRoot::Layer_Ground);
         podoboo->setPos(pos);
 
     }

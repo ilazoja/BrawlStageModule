@@ -12,8 +12,8 @@ grIzumi* grIzumi::create(int mdlIndex, const char* tgtNodeName, const char* task
     return ground;
 }
 
-void grIzumi::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grYakumono::startup(archive, unk1, unk2);
+void grIzumi::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grYakumono::startup(archive, unk1, layerType);
     u32 nodeIndex = -1;
     if (this->getNodeIndex(&nodeIndex, 0, "sound_center")) {
         Vec3f pos;

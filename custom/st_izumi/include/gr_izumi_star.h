@@ -15,7 +15,7 @@ public:
     };
     virtual void update(float deltaFrame);
     virtual ~grIzumiStar(){};
-    virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+    virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
     virtual void setTimer();
     virtual void startStarEffect(u32 colourIndex);
     virtual void stopStarEffect();

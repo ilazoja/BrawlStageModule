@@ -57,7 +57,7 @@ void stSmashketball::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -115,7 +115,7 @@ void stSmashketball::createObjCannon(int mdlIndex, int index) {
     {
         addGround(cannon);
         cannon->setGimmickData(&this->cannonData[index]);
-        cannon->startup(m_fileData, 0, 0);
+        cannon->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
 }
 
@@ -125,7 +125,7 @@ void stSmashketball::createObjGlass(int mdlIndex, int collIndex, int index) {
     if (glass != NULL)
     {
         addGround(glass);
-        glass->startup(m_fileData, 0, 0);
+        glass->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         glass->setStageData(m_stageData);
         glass->setPos(smashketballData->glassPos[index].m_x, smashketballData->glassPos[index].m_y, 0);
         createCollision(m_fileData, collIndex, glass);

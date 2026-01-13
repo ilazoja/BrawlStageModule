@@ -21,8 +21,8 @@ grGhostHouseFishing* grGhostHouseFishing::create(int mdlIndex, const char* tgtNo
     return boo;
 }
 
-void grGhostHouseFishing::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grGhostHouseFishing::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     this->createEffectWork(1);
     SimpleEffectData simpleEffectData;
@@ -43,7 +43,7 @@ void grGhostHouseFishing::setupAttack() {
     float size = 1.0;
     Vec3f offsetPos = Vec3f(0.0, 0.0, 0.0);
     this->setAttack(size, &offsetPos);
-    this->m_attackInfo->m_preset = 4;
+    this->m_attackInfo->m_preset = Attack_Overwrite;
 
     soCollisionAttackData* overwriteAttackData = this->getOverwriteAttackData();
     this->createAttackPointNormal(overwriteAttackData);
@@ -278,7 +278,7 @@ void grGhostHouseFishing::changeState(State state) {
                     this->itemInstanceId = item->m_instanceId;
                     Vec3f pos = this->getPos();
                     item->warp(&pos);
-                    this->timer = soExternalValueAccesser::getWorkInt(item, BaseItem::Instance_Work_Int_Life_Time);
+                    this->timer = soExternalValueAccesser::getWorkInt(item, BaseItem::Instance::Work::Int_Life_Time);
                 }
             }
                 break;

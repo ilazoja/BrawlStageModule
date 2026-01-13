@@ -20,7 +20,7 @@ class grKrazoaSpawner : public grMadein
             isSilentDeployment = true;
         };
         virtual ~grKrazoaSpawner() { };
-        virtual void startup(gfArchive* archive, u32 unk1, u32 unk2);
+        virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
         virtual void update(float deltaFrame);
 
         virtual void setConfig(int motionPathMdlIndex, float minRespawnFrames, float maxRespawnFrames, float spawnAfterFrames, bool isFirstSilentDeployment);

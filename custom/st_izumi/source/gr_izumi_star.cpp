@@ -17,8 +17,8 @@ grIzumiStar* grIzumiStar::create(int mdlIndex, const char* tgtNodeName, const ch
     return ground;
 }
 
-void grIzumiStar::startup(gfArchive* archive, u32 unk1, u32 unk2) {
-    grMadein::startup(archive, unk1, unk2);
+void grIzumiStar::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType) {
+    grMadein::startup(archive, unk1, layerType);
 
     this->createEffectWork(2);
 

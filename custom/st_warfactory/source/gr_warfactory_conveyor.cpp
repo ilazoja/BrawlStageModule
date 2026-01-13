@@ -11,9 +11,9 @@ grWarFactoryConveyor* grWarFactoryConveyor::create(int mdlIndex, const char* tgt
     return ground;
 }
 
-void grWarFactoryConveyor::startup(gfArchive* archive, u32 unk1, u32 unk2)
+void grWarFactoryConveyor::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType)
 {
-    grYakumono::startup(archive, unk1, unk2);
+    grYakumono::startup(archive, unk1, layerType);
     ConveyorGimmickData* conveyorGimmickData = (ConveyorGimmickData*)this->getGimmickData();
     Vec3f pos = Vec3f(conveyorGimmickData->pos.m_x,conveyorGimmickData->pos.m_y,0);
     Vec2f areaPos = Vec2f(0.0, 0.0);

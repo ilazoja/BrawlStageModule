@@ -52,7 +52,7 @@ void stLava::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -63,7 +63,7 @@ void stLava::createObjLava(int mdlIndex) {
     if (lava != NULL)
     {
         addGround(lava);
-        lava->startup(m_fileData, 0, 0);
+        lava->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         lava->setStageData(m_stageData);
         lava->setupAttack();
         lava->initializeEntity();

@@ -69,7 +69,7 @@ void stCheeseBridge::createObjGround(int mdlIndex) {
     {
         addGround(ground);
         ground->setStageData(m_stageData);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setDontMoveGround();
     }
 }
@@ -82,7 +82,7 @@ void stCheeseBridge::createObjPlatform(int mdlIndex, int collIndex, int motionPa
         platform->setMotionPathData(motionPathIndex);
         platform->setCooldownTimerWork(&this->platformCooldownRailTimers[railIndex]);
         platform->setStageData(m_stageData);
-        platform->startup(m_fileData, 0, 0);
+        platform->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         createCollision(m_fileData, collIndex, platform);
     }
 }
@@ -95,7 +95,7 @@ void stCheeseBridge::createObjSaw(int mdlIndex, int motionPathIndex, int railInd
         saw->setMotionPathData(motionPathIndex);
         saw->setCooldownTimerWork(&this->sawCooldownRailTimers[railIndex]);
         saw->setStageData(m_stageData);
-        saw->startup(m_fileData, 0, 0);
+        saw->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         saw->initializeEntity();
         saw->startEntityAutoLoop();
     }
@@ -109,7 +109,7 @@ void stCheeseBridge::createObjRope(int mdlIndex, int motionPathIndex, int railIn
         rope->setMotionPathData(motionPathIndex);
         rope->setCooldownTimerWork(&this->ropeCooldownRailTimers[railIndex]);
         rope->setStageData(m_stageData);
-        rope->startup(m_fileData, 0, 0);
+        rope->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         rope->initializeEntity();
         rope->startEntityAutoLoop();
     }

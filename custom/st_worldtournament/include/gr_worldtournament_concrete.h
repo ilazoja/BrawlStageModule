@@ -12,7 +12,7 @@ public:
     {
 
     };
-    virtual void startup(gfArchive* data, u32 unk1, u32 unk2);
+    virtual void startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerType);
     virtual void update(float deltaFrame);
     virtual void receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3);
     virtual void onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId);

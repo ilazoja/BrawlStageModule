@@ -56,7 +56,7 @@ Ground* stGimmick::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         u32 platformsIndex = ground->getNodeIndex(0, "Platforms");
@@ -180,7 +180,7 @@ void stGimmick::createObjPlatform(int mdlIndex, Vec2f* pos, float rot, float sca
         addGround(platform);
         platform->setStageData(m_stageData);
         platform->setMotionPathData(motionPathIndex);
-        platform->startup(this->m_fileData,0,0);
+        platform->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         platform->setPos(pos->m_x, pos->m_y, 0.0);
         platform->setScale(scale, scale, scale);
         platform->setRot(0.0, 0.0, rot);
@@ -196,7 +196,7 @@ void stGimmick::createObjBreak(int mdlIndex, Vec2f* pos, float rot, int motionPa
         addGround(platform);
         platform->setStageData(m_stageData);
         platform->setMotionPathData(motionPathIndex);
-        platform->startup(this->m_fileData,0,0);
+        platform->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         platform->setupHitPoint(maxDamage, respawnTime);
         platform->initializeEntity();
         platform->startEntity();
@@ -214,7 +214,7 @@ void stGimmick::createObjLand(int mdlIndex, Vec2f* pos, float rot, int motionPat
         addGround(platform);
         platform->setStageData(m_stageData);
         platform->setMotionPathData(motionPathIndex);
-        platform->startup(this->m_fileData,0,0);
+        platform->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         platform->setupLanding(maxLandings, respawnTime);
         platform->setPos(pos->m_x, pos->m_y, 0.0);
         platform->setRot(0.0, 0.0, rot);
@@ -228,7 +228,7 @@ void stGimmick::createObjElevator(int mdlIndex, Vec2f* pos, Vec2f* range, int co
     {
         addGround(elevator);
         elevator->prepareElevatorData(pos, range, speed, deltaSpeed, posIndex);
-        elevator->startup(m_fileData, 0, 0);
+        elevator->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         createCollision(m_fileData, collIndex, elevator);
     }
 }
@@ -239,7 +239,7 @@ void stGimmick::createObjPunchSlider(int mdlIndex, int sliderPathIndex, int moti
         addGround(slider);
         slider->setStageData(m_stageData);
         slider->prepareSliderData(motionPathIndex, sliderPathIndex, unk1, unk2, unk3, unk4, unk5, unk6);
-        slider->startup(m_fileData, 0, 0);
+        slider->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
 }
 
@@ -257,7 +257,7 @@ void stGimmick::createObjSpring(int mdlIndex, int collIndex, Vec2f* pos, float r
                 range);
         spring->setMotionPathData(motionPathIndex);
         spring->setGimmickData(&springData); // Note: gimmickData will only apply in next function since was allocated on the stack
-        spring->startup(this->m_fileData,0,0);
+        spring->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         this->createGimmickCollision(collIndex, spring, this->m_fileData);
     }
 }
@@ -270,7 +270,7 @@ void stGimmick::createObjCannon(int mdlIndex, Vec2f* pos, float rot, float rotSp
         addGround(cannon);
         cannon->setStageData(m_stageData);
         cannon->prepareCannonData(pos, rot, rotSpeed, maxRot, motionPathIndex, alwaysRotate, fullRotate, autoFireFrames);
-        cannon->startup(m_fileData, 0, 0);
+        cannon->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
 }
 
@@ -286,7 +286,7 @@ void stGimmick::createObjLadder(int mdlIndex, Vec2f* pos, int motionPathIndex, b
                 &areaPos, &areaRange
         );
         ladder->setMotionPathData(motionPathIndex);
-        ladder->startupLadder(this->m_fileData,0,0,&ladderData);
+        ladder->startupLadder(this->m_fileData, 0, gfSceneRoot::Layer_Ground, &ladderData);
         ladder->setPos(pos->m_x, pos->m_y, 0.0);
     }
 }
@@ -296,7 +296,7 @@ void stGimmick::createObjCatapult(int mdlIndex, float vector, float motionRatio,
     if (catapult != NULL) {
         addGround(catapult);
         catapult->prepareCatapultData(vector, motionRatio, motionPathIndex, framesBeforeStartMove, unk1, unk2);
-        catapult->startup(m_fileData, 0, 0);
+        catapult->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
 }
 
@@ -314,7 +314,7 @@ void stGimmick::createObjWarpZone(int mdlIndex, Vec2f* pos, float rot, float sca
         Vec3f warpDestPos = Vec3f(warpDest->m_x, warpDest->m_y, 0.0);
         warpZone->setWarpAttrData(&warpDestPos, warpType, isNotAuto);
         warpZone->setGimmickData(&warpData); // Note: gimmickData will only apply in next function since was allocated on the stack
-        warpZone->startup(m_fileData, 0, 0);
+        warpZone->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         warpZone->setRot(0, 0, rot);
         warpZone->setScale(scale, scale, scale);
         if (connectedMdlIndex > 0) {
@@ -326,7 +326,7 @@ void stGimmick::createObjWarpZone(int mdlIndex, Vec2f* pos, float rot, float sca
                 warpDestPos = Vec3f(pos->m_x, pos->m_y, 0.0);
                 toWarpZone->setWarpAttrData(&warpDestPos, warpType, isNotAuto);
                 toWarpZone->setGimmickData(&warpData); // Note: gimmickData will only apply in next function since was allocated on the stack
-                toWarpZone->startup(m_fileData, 0, 0);
+                toWarpZone->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
                 toWarpZone->setRot(0, 0, rot);
                 toWarpZone->setScale(scale, scale, scale);
 

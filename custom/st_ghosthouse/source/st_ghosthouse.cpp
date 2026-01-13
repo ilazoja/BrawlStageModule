@@ -142,7 +142,7 @@ void stGhostHouse::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
     }
@@ -155,7 +155,7 @@ void stGhostHouse::createObjHole(int mdlIndex, int collIndex, Vec2f* pos, Vec3f*
         addGround(ground);
         ground->setMotionPathData(motionPathIndex);
         ground->setStageData(m_stageData);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         this->createCollision(m_fileData, collIndex, ground);
         ground->setPos(pos->m_x, pos->m_y, 0.0);
         ground->setScale(scale);
@@ -168,7 +168,7 @@ void stGhostHouse::createObjBoo(int mdlIndex, bool useAltAnim) {
     {
         addGround(boo);
         boo->setStageData(m_stageData);
-        boo->startup(m_fileData, 0, 0);
+        boo->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         boo->setSpawn(&this->m_cameraParam1->m_range, &this->m_cameraParam1->m_centerPos, useAltAnim);
     }
 }
@@ -179,7 +179,7 @@ void stGhostHouse::createObjBigBoo(int mdlIndex) {
     {
         addGround(boo);
         boo->setStageData(m_stageData);
-        boo->startup(m_fileData, 0, 0);
+        boo->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         boo->setSpawn();
     }
 }
@@ -190,7 +190,7 @@ void stGhostHouse::createObjBubble(int mdlIndex) {
     {
         addGround(bubble);
         bubble->setStageData(m_stageData);
-        bubble->startup(m_fileData, 0, 0);
+        bubble->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         bubble->setupAttack();
         bubble->initializeEntity();
         bubble->startEntity();
@@ -204,7 +204,7 @@ void stGhostHouse::createObjEerie(int mdlIndex) {
     {
         addGround(eerie);
         eerie->setStageData(m_stageData);
-        eerie->startup(m_fileData, 0, 0);
+        eerie->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         eerie->setupAttack();
         eerie->initializeEntity();
         eerie->startEntity();
@@ -218,7 +218,7 @@ void stGhostHouse::createObjFishing(int mdlIndex, Vec2f* boundarySWPos, Vec2f* b
     {
         addGround(fishing);
         fishing->setStageData(m_stageData);
-        fishing->startup(m_fileData, 0, 0);
+        fishing->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         fishing->setupAttack();
         fishing->initializeEntity();
         fishing->startEntity();
@@ -235,7 +235,7 @@ void stGhostHouse::createObjMotionPath(int mdlIndex, int index) {
     {
         addGround(motionPath);
         motionPath->setGimmickData(&this->circleMotionPathData);
-        motionPath->startup(m_fileData, 0, 0);
+        motionPath->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
 }
 

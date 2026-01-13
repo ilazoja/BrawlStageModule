@@ -53,7 +53,7 @@ Ground* stKongoJungleRedux::createObjGround(int mdlIndex) {
     if (ground != NULL)
     {
         addGround(ground);
-        ground->startup(m_fileData, 0, 0);
+        ground->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
         ground->setStageData(m_stageData);
         ground->setDontMoveGround();
         u32 platformsIndex = ground->getNodeIndex(0, "Platforms");
@@ -96,7 +96,7 @@ grPlatform* stKongoJungleRedux::createObjPlatform(int mdlIndex, Vec2f* pos, floa
         addGround(platform);
         platform->setStageData(m_stageData);
         platform->setMotionPathData(motionPathIndex);
-        platform->startup(this->m_fileData,0,0);
+        platform->startup(this->m_fileData,0,gfSceneRoot::Layer_Ground);
         platform->setPos(pos->m_x, pos->m_y, 0.0);
         platform->setScale(scale, scale, scale);
         platform->setRot(0.0, 0.0, rot);
@@ -115,7 +115,7 @@ grAdventureBarrelCannon* stKongoJungleRedux::createObjCannon(int mdlIndex, Vec2f
         addGround(cannon);
         cannon->setStageData(m_stageData);
         cannon->prepareCannonData(pos, rot, rotSpeed, maxRot, motionPathIndex, alwaysRotate, fullRotate, autoFireFrames);
-        cannon->startup(m_fileData, 0, 0);
+        cannon->startup(m_fileData, 0, gfSceneRoot::Layer_Ground);
     }
     return cannon;
 }
