@@ -56,7 +56,7 @@ void grWorldTournamentGrass::receiveCollMsg_Landing(grCollStatus* collStatus, gr
                     float scale = postureModule.getScale(); // TODO: Get model scale?
                     Vec3f effectScale = Vec3f(scale, scale, scale);
                     g_ecMgr->setEffect(ef_ptc_common_clacker_bomb, &pos, NULL, &effectScale);
-                    fighter->toDead(-1);
+                    fighter->toDead(Fighter::Dead::Reason_Invalid);
                 }
             }
         }
