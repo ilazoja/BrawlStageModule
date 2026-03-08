@@ -55,14 +55,14 @@ void grFire::startup(gfArchive* archive, u32 unk1, gfSceneRoot::LayerType layerT
 
     overwriteAttackData->m_nodeIndex = startHitboxNode;
 
-    overwriteAttackData->m_targetCategory = COLLISION_CATEGORY_MASK_ALL;
+    overwriteAttackData->m_targetCategory = soCollision::CATEGORY_MASK_ALL;
 
     overwriteAttackData->m_targetSituationODD = true;
     overwriteAttackData->m_targetSituationAir = true;
     overwriteAttackData->m_targetSituationGround = true;
 
     overwriteAttackData->m_targetLr = false;
-    overwriteAttackData->m_targetPart = COLLISION_PART_MASK_ALL;
+    overwriteAttackData->m_targetPart = soCollision::PART_MASK_ALL;
     overwriteAttackData->m_attribute = soCollisionAttackData::Attribute_Fire;
 
     overwriteAttackData->m_soundLevel = soCollisionAttackData::Sound_Level_Small;

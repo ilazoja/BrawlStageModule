@@ -46,14 +46,14 @@ void grQbertGreen::setupAttack() {
 
     overwriteAttackData->m_nodeIndex = 0x1;
 
-    overwriteAttackData->m_targetCategory = COLLISION_CATEGORY_MASK_FIGHTER | COLLISION_CATEGORY_MASK_GIMMICK;
+    overwriteAttackData->m_targetCategory = soCollision::CATEGORY_MASK_FIGHTER | soCollision::CATEGORY_MASK_GIMMICK;
 
     overwriteAttackData->m_targetSituationODD = true;
     overwriteAttackData->m_targetSituationAir = true;
     overwriteAttackData->m_targetSituationGround = true;
 
     overwriteAttackData->m_targetLr = false;
-    overwriteAttackData->m_targetPart = COLLISION_PART_MASK_ALL;
+    overwriteAttackData->m_targetPart = soCollision::PART_MASK_ALL;
     overwriteAttackData->m_attribute = soCollisionAttackData::Attribute_Magic;
 
     overwriteAttackData->m_soundLevel = soCollisionAttackData::Sound_Level_Small;

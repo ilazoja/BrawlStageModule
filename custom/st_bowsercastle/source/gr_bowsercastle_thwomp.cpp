@@ -114,14 +114,14 @@ void grBowserCastleThwomp::setupAttack() {
 
     overwriteAttackData->m_nodeIndex = this->getNodeIndex(0, "Attack");
 
-    overwriteAttackData->m_targetCategory = COLLISION_CATEGORY_MASK_GIMMICK;
+    overwriteAttackData->m_targetCategory = soCollision::CATEGORY_MASK_GIMMICK;
 
     overwriteAttackData->m_targetSituationODD = true;
     overwriteAttackData->m_targetSituationAir = false;
     overwriteAttackData->m_targetSituationGround = false;
 
     overwriteAttackData->m_targetLr = false;
-    overwriteAttackData->m_targetPart = COLLISION_PART_MASK_ALL;
+    overwriteAttackData->m_targetPart = soCollision::PART_MASK_ALL;
     overwriteAttackData->m_attribute = soCollisionAttackData::Attribute_None;
 
     overwriteAttackData->m_soundLevel = soCollisionAttackData::Sound_Level_Small;

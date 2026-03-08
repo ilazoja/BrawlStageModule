@@ -31,7 +31,7 @@ void grQbertDisk::update(float frameDelta){
 
 void grQbertDisk::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3) {
     if (!isMoving) {
-        CategoryFlag categoryFlag(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER);
+        CollCategoryFlag categoryFlag(COLL_CATEGORY_MASK_FIGHTER);
         if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlag)) {
             this->setMotionDetails(1, 1, 0, 0, 0);
             this->soundGenerator.playSE(snd_se_stage_Madein_good_05, 0x0, 0x0, 0xffffffff);

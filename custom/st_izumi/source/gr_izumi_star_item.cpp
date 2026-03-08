@@ -156,7 +156,7 @@ grIzumiStarItem::RainMode grIzumiStarItem::getRainMode() {
         scMelee* scene = static_cast<scMelee*>(gfSceneManager::getInstance()->searchScene("scMelee"));
         stOperatorDropItem* operatorDropItem = scene->m_operatorDropItem;
         if (operatorDropItem != NULL && operatorDropItem->m_isSuddenDeath) {
-            if (operatorDropItem->m_framesElapsedStartBombDrop >= FRAMES_REQUIRED_START_BOMB_DROP) {
+            if (operatorDropItem->m_framesElapsedStartBombDrop >= stOperatorDropItem::FRAMES_REQUIRED_START_BOMB_DROP) {
                 return Rain_Start;
             }
             else {

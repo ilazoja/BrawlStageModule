@@ -52,12 +52,14 @@ void grGhostHouseHole::updateColl(float deltaFrame) {
             && segment.m_p1Pos.m_x >= posSW.m_x && segment.m_p1Pos.m_x < posNE.m_x
             && segment.m_p0Pos.m_y >= posSW.m_y && segment.m_p0Pos.m_y < posNE.m_y
             && segment.m_p1Pos.m_y >= posSW.m_y && segment.m_p1Pos.m_y < posNE.m_y) {
-            collisionLine->m_isTargetAll = false;
+            collisionLine->m_isTargetFighter = false;
+            collisionLine->m_isTargetItem = false;
             collisionLine->m_isUnder = false;
 
         }
         else {
-            collisionLine->m_isTargetAll = true;
+            collisionLine->m_isTargetFighter = true;
+            collisionLine->m_isTargetItem = true;
             collisionLine->m_isUnder = true;
         }
     }

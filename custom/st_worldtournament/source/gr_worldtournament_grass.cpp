@@ -40,7 +40,7 @@ void grWorldTournamentGrass::onGimmickEvent(soGimmickEventArgs* eventInfo, int* 
 }
 
 void grWorldTournamentGrass::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3) {
-    CategoryFlag categoryFlag(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER);
+    CollCategoryFlag categoryFlag(COLL_CATEGORY_MASK_FIGHTER);
     if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlag)) {
         Fighter* fighter = (Fighter*)gfTask::getTask(collStatus->m_taskId);
         if (fighter != NULL) {

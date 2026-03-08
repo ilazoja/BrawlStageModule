@@ -143,7 +143,7 @@ void grIzumiSpout::fountainInit(u32 spoutId)
         this->level = Level_Active;
     }
 
-    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, AREA_SHAPE_FLAG_FOLLOW_NODE, 0, 0, this->getNodeIndex(0, "Trigger"), Vec2f(0.0, 0.0), izumiData->areaRange);
+    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, soAreaData::SHAPE_MASK_FOLLOW_NODE, 0, 0, this->getNodeIndex(0, "Trigger"), Vec2f(0.0, 0.0), izumiData->areaRange);
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);
     trigger->setObserveYakumono(this->m_yakumono);
@@ -377,7 +377,7 @@ void grIzumiSpout::onGimmickEvent(soGimmickEventArgs* eventInfo, int* taskId)
 void grIzumiSpout::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3) {
     if (this->level != Level_Off) {
         stIzumiData* izumiData = static_cast<stIzumiData*>(this->getStageData());
-        CategoryFlag categoryFlagFighter(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER);
+        CollCategoryFlag categoryFlagFighter(COLL_CATEGORY_MASK_FIGHTER);
         if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlagFighter)) {
             int entryId = g_ftManager->getEntryIdFromTaskId(collStatus->m_taskId, NULL);
             if (entryId >= 0) {
@@ -414,7 +414,7 @@ void grIzumiSpout::receiveCollMsg_Landing(grCollStatus* collStatus, grCollisionJ
             }
         }
 
-        CategoryFlag categoryFlagItem(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_ITEM);
+        CollCategoryFlag categoryFlagItem(COLL_CATEGORY_MASK_ITEM);
         if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlagItem)) {
             BaseItem *item = static_cast<BaseItem *>(gfTask::getTask(collStatus->m_taskId));
             if (item != NULL && item->m_kind == Item_WarpStar &&

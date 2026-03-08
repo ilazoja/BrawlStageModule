@@ -26,7 +26,7 @@ void grGyromite::update(float deltaFrame)
 }
 
 void grGyromite::receiveCollMsg_Heading(grCollStatus* collStatus, grCollisionJoint* collisionJoint, bool unk3) {
-    CategoryFlag categoryFlag(GROUND_COLL_STATUS_OWNER_TASK_CATEGORY_MASK_FIGHTER);
+    CollCategoryFlag categoryFlag(COLL_CATEGORY_MASK_FIGHTER);
     if (this->isCollisionStatusOwnerTask(collStatus, &categoryFlag)) {
         int entryId = g_ftManager->getEntryIdFromTaskId(collStatus->m_taskId, NULL);
         if (entryId > -1) {
