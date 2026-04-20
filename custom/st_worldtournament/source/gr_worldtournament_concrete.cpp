@@ -15,7 +15,7 @@ grWorldTournamentConcrete* grWorldTournamentConcrete::create(int mdlIndex, const
 
 void grWorldTournamentConcrete::startup(gfArchive* data, u32 unk1, gfSceneRoot::LayerType layerType) {
     grYakumono::startup(data, unk1, layerType);
-    this->areaData.set(gfArea::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(0.0, -115.0), Vec2f(1000.0,100.0));
+    this->areaData.set(soAreaInstance::Shape_Rectangle, gfArea::Stage_Group_Gimmick_Normal, 0, 0, 0, 0, Vec2f(0.0, -115.0), Vec2f(1000.0,100.0));
     this->setAreaGimmick(&this->areaData, &this->areaInit, &this->areaInfo, false);
     stTrigger* trigger = g_stTriggerMng->createTrigger(Gimmick::Area_Common,-1);
     trigger->setObserveYakumono(this->m_yakumono);
